@@ -1,0 +1,2 @@
+2019/09/19 10:30:28 [error] 10#10: *1 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/19 10:31:04 [error] 10#10: *3 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
