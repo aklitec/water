@@ -1,0 +1,20 @@
+# profile
+user.profile: profil
+user.settings: paramètres
+user.inbox: boîte de réception
+user.logout: se déconnecter
+
+# NavBar
+nav.home: accueil
+nav.students: étudiants
+nav.certificates: certificats
+nav.library: bibliothèque
+nav.users: utilisateurs
+nav.documentation: documentation
+nav.configuration: configuration
+nav.studyLevel: niveau d'étude
+nav.option: branche
+USER: Utilisateur
+
+# General
+documentation: documentation

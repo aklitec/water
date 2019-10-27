@@ -15,7 +15,7 @@ services:
         ports:
             - "9000:9001"
         volumes:
-            - .:/var/www/symfony #:cached
+            - .:/var/www/symfony:cached
             - ./.docker/logs/symfony:/var/www/symfony/var/log:cached
         links:
             - db
@@ -30,7 +30,7 @@ services:
             - php
         volumes:
             - ./.docker/logs/nginx:/var/log/nginx:cached
-            - .:/var/www/symfony #:cached
+            - .:/var/www/symfony:cached
     elk:
         image: willdurand/elk
         ports:

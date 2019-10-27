@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'dashboard' %}
+{%  set locale = app.request.getLocale() %}
+{% if locale =="ar_MA"%} 
+{% set classVar2 ='direction:rtl' %} 
+{% else %}
+{% set classVar2 =''%}
+{% endif %} 
+
+{% block title %}{{'Dashboard'|trans }} | {{ parent() }}{% endblock %}
+{% block pageHeader %}
+    <div class="page-header" style={{classVar2}}>
+        <h1 class="page-title">
+            {{'Dashboard'|trans }}
+        </h1>
+    </div>
+    <h2>{{ locale }} </h2>
+{% endblock %}
+
+{# {% block content %}
+    {% include 'dashboard/_summary.html.twig' %}
+
+    {% include 'dashboard/_recent.html.twig' %}
+
+    </div>
+{% endblock %} #}

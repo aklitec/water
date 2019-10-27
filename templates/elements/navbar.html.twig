@@ -1,0 +1,45 @@
+
+
+{% trans_default_domain 'dashboard' %}
+{%  set locale = app.request.getLocale() %}
+{% if locale =="ar_MA"%} 
+{% set classVar2 ='class' %} 
+{% else %}
+{% set classVar2 =''%}
+{% endif %}
+<style>
+    {# .class>li>a{
+        direction:ltr
+    } #}
+    .class{
+        direction:ltr
+    }
+    {% if locale =="ar_MA"%} 
+    .nav-item{
+       direction:rtl !important 
+    }
+    {% endif %}
+</style> 
+
+{% trans_default_domain 'layout' %}
+<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+    <div class="container">
+        <div class="row align-items-center">
+            {% set route = app.request.get('_route') %}
+            <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row {{classVar2}}"  >
+                    <li class="nav-item">
+                        <a href="/" class="nav-link {{ 'dashboard' in route ? 'active' }} " ><i class="fe fe-home"></i> {{ 'nav.dashboard' | trans}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('users_index') }}" class="nav-link {{ 'users_index' in route ? 'active' }} " ><i class="fe fe-user"></i> {{ 'nav.users' | trans}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('doc_index') }}" class="nav-link {{ 'doc_index' in route ? 'active' }}"><i class="fe fe-file-text"></i>{{ 'nav.docs' | trans}}</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+{% extends 'layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+{%  set locale = app.request.getLocale() %}
+<style type="text/css">                
+/*                {% set classVar1 = '' %}  and {% set classVar2 = 'ml-auto' %} and 
+*/                  .dirRtl{
+                        direction:rtl
+                    }
+                    .form-label-floated{
+                        float:right
+                    }
+                    .form-label-flexed{
+                        display:flex
+                    }
+                    .float-right-edited{
+                        margin-right:6vw;
+                    }
+                    .checkbox-floated{
+                        float:right
+                    }
+                    .col-login{
+                        max-width: 30rem !important;
+                    }
+                    .card{
+                        padding: 20px !important;
+                    }
+
+                {% if locale =="ar_MA"%}
+                {% set Var1 = 'dirRtl '  %}  and {%  set Var2 = 'form-label-floated'  %}
+                and {%  set Var3 = 'form-label-flexed'  %} and {%  set Var4 = 'float-right-edited'  %}
+                and {% set Var5 = 'checkbox-floated '  %} 
+                 {% else %}
+                {% set Var1 = ''  %}  and {%  set Var2 = ''  %}
+                and {%  set Var3 = ''  %} and {%  set Var4 = ''  %}
+                and {% set Var5 = ''  %} 
+                {% endif %}    
+                 
+</style>
+    <div class="page">
+        <div class="page-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-login mx-auto">
+                        <div class="text-center mb-6">
+                            <img src="{{ asset('/app/img/logo.jpg') }}" class="h-8" alt="">
+                        </div>
+                        <div class="card">
+                                <div style="display:block; margin: auto; margin-top: auto; margin-top: 15px">
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        <div>
+                                        {{ 'layout.logged_in_as'|trans }} {{app.user.username }} |
+                                        <a href="{{ path('fos_user_security_logout') }}">
+                                             {{ 'layout.logout'| trans }}
+                                        </a>
+                                        <div>
+                                    {% else %}
+                                        <div>
+                                          <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'| trans }}</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if app.request.hasPreviousSession %}
+                                    {% for type, messages in app.session.flashbag.all() %}
+                                        
+                                        {% for message in messages %}
+                                            <div class="flash-{{ type }}" style="display:block ;margin: auto; margin-top: auto; margin-top: 15px;" >
+                                                {{ message}}
+                                                {{dump(message)}}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}
+                            
+                                    {% block fos_user_content %}
+                                    {% endblock fos_user_content %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

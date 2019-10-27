@@ -1,0 +1,14 @@
+security:
+    login:
+        login: Connexion
+        forgotten_password: Mot de passe oublié
+        username: "Nom d'utilisateur"
+        password: Mot de passe
+        remember_me: Se souvenir de moi
+        submit: Connexion
+resetting.request.submit: Réinitialiser le mot de passe
+resetting.request.username: Nom d'utilisateur ou adresse e-mail
+page.of: retour au page de 
+layout.login: Conextion
+layout.logout: Déconextion
+layout.logged_in_as: Connecté en tant que

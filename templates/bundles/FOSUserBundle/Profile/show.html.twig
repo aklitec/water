@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'user' %}
+
+{% block title %}{{ 'profile' | trans }} | {{ parent() }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <h1 class="page-title">
+            {{ 'profile' | trans  }}
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row col-12">
+
+        <div class="card">
+
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="card-options">
+                    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-sm btn-primary mr-2"><i class="fe fe-edit"></i> {{ 'edit'|trans({},'actions') }}</a>
+                    <a href="{{ path('fos_user_change_password') }}" class="btn btn-sm btn-dark mr-2"><i class="fe fe-file-text"></i> {{ 'change password' | trans }}</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body card-tab">
+            <div class="tab-content">
+                <div class="tab-pane container active" id="user">
+                    <div class="table-responsive">
+                        <table class="table card-table table-striped table-vcenter">
+                            <tbody>
+                            <tr>
+                                <th>{{ 'profile show username' | trans }}</th>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'profile show email' | trans }}</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'profile show roles' | trans }}</th>
+                                <td>
+                                        <span class="badge badge-success">{{ user.roles[0]  | split('_', 2)| last =='ADMIN'? 'Admin'| trans :'User'| trans }}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

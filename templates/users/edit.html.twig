@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'user' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %} {{ 'users.edit.title' | trans }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <h1 class="page-title">
+            {{ 'users.edit.title' | trans }}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+            <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
+            <li class="active">{{ 'users.edit.title' | trans }}</li>
+        </ol>
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row row-cards">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-header isolated">
+                <h3 class="card-title">{{ 'users.edit.title' | trans}}</h3>
+                <div class="card-options">
+                    {{ include('users/_delete_form.html.twig', {text: true }) }}
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body-title">{{ 'users.show.userInfo'|trans }}<div class="pull-right"><i class="fe fe-info"></i></div></div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">{{ form_row(form.fullName) }}</div>
+                    <div class="col-md-6 col-sm-12">{{ form_row(form.avatarFile) }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body-title">{{ 'users.show.accountInfo'|trans }}</div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="col-md-6 col-sm-12">{{ form_row(form.roles) }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-footer isolated">
+                <div class="d-flex">
+                    <a href="{{ path('users_index') }}" class="btn btn-link">{{'users.actions.cancel'|trans}}</a>
+                    <button type="submit" class="btn btn-primary ml-auto"> <i class="fe fe-save"></i> {{'users.actions.save'|trans}}</button>
+                </div>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+</div>
+{% endblock %}

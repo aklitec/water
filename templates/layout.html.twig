@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ app_name }}
+{% endblock %}
+
+{% set locale = app.request.getLocale() | default("fr") %}
+
+
+
+{% block stylesheets %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+{#    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">#}
+    <!-- Dashboard Core -->
+    {% if locale == "ar_MA" %}
+        <link href="{{ asset('tabler/css/dashboard.rtl.css') }}" rel="stylesheet"/>
+    {% else %}
+        <link href="{{ asset('tabler/css/dashboard.css') }}" rel="stylesheet"/>
+    {% endif %}
+    <!-- Datepicker Plugin -->
+    <link href="{{ asset('tabler/plugins/datetimepicker/plugin.css') }}" rel="stylesheet"/>
+    <!-- Toastify Plugin -->
+    <link href="{{ asset('tabler/plugins/toastify/toastify.css') }}" rel="stylesheet"/>
+    <!-- App Styles -->
+    <link href="{{ asset('app/css/styles.css') }}" rel="stylesheet"/>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Require JS -->
+    <script src="{{ asset('tabler/js/require.min.js') }}"></script>
+    <script> requirejs.config({baseUrl: '.'}); </script>
+    <!-- Dashboard Core -->
+    <script src="{{ asset('tabler/js/dashboard.js') }}"></script>
+    <!-- Input Mask Plugin -->
+    <script src="{{ asset('tabler/plugins/input-mask/plugin.js') }}"></script>
+    <!-- Datepicker Plugin -->
+    <script src="{{ asset('tabler/plugins/datetimepicker/plugin.js') }}"></script>
+    <!-- Toastify Plugin -->
+    <script src="{{ asset('tabler/plugins/toastify/toastify.js') }}"></script>
+    <!-- App main.js -->
+    <script src="{{ asset('app/js/main.js') }}"></script>
+
+
+
+{% endblock %}
+
+{% block bodyClass %}
+    body-class
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="page-main">
+            {% include 'elements/header.html.twig' %}
+
+            {% include 'elements/navbar.html.twig' %}
+
+            <div class="my-3 my-md-5">
+                <div class="container">
+                    {% block pageHeader %}
+                        -- page header --
+                    {% endblock %}
+
+                    {% block flashBag %}
+                        {% include "elements/flashBag.html.twig" %}
+                    {% endblock flashBag %}
+
+                    {% block content %}
+                        -- pages content here --
+                    {% endblock %}
+                </div>
+            </div>
+
+            {% include 'elements/footer.html.twig' %}
+
+        </div>
+    </div>
+{% endblock %}

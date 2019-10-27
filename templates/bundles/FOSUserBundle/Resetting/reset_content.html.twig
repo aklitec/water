@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+<div class="card-body col-14 col-centered" style="margin-top:5% ;">
+<div class="row">
+             <div class="col-md-14 col-sm-12">{{ form_row(form.plainPassword.first) }}</div>
+        </div>
+        <div class="row">
+             <div class="col-md-14 col-sm-12">{{ form_row(form.plainPassword.second) }}</div>
+        </div>
+</div>
+<div class="card-footer col-11 col-centered" style="margin-bottom: 10%">
+        <div class="d-flex class1">
+                 <input type="submit" value="{{ 'resetting.reset.submit' | trans }}" />
+        </div>
+</div>
+{{ form_end(form) }}

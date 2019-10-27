@@ -1,0 +1,68 @@
+{% trans_default_domain 'dashboard' %}
+{%  set locale = app.request.getLocale() %}
+{% if locale =="ar_MA"%} 
+  {% set classVar1 ='padding-right:unset !important' %} 
+{% else %}
+  {% set classVar1 ='' %}
+{% endif %} 
+
+<div class="row col-12">
+
+    <div class="col-sm-6 col-lg-4" >
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ 'Latest Students' | trans }}</h4>
+            </div>
+            <table class="table card-table">
+                <tbody>
+                {% for student in students.latest %}
+                    <tr>
+                        <td width="1"><i class="fa fa-user-circle text-muted"></i></td>
+                        <td>{{ student }}</td>
+                        <td class="text-right"><span class="text-muted">{{ student.studyLevel }}</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ 'Latest printed certificates' | trans }}</h4>
+            </div>
+            <table class="table card-table">
+                <tbody>
+                {% for certificate in certificates.latest %}
+                    <tr>
+                        <td width="1"><i class="fa fa-user-circle text-muted"></i></td>
+                        <td>{{ certificate | raw }}</td>
+                        <td class="text-right"><span class="text-muted">{{ certificate.createdAt | date('d/m/Y') }}</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4" style={{classVar1}}>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ 'Latest Connected users' | trans }}</h4>
+            </div>
+            <table class="table card-table">
+                <tbody>
+                {% for user in users.latest %}
+                    <tr>
+                        <td width="1"><i class="fa fa-user text-muted"></i></td>
+                        <td>{{ user }}</td>
+                        <td class="text-right"><span class="text-muted">{{ user.lastLogin | date('d/m/Y H:i') }}</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

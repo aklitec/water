@@ -1,0 +1,40 @@
+users index title: قائمة المستخدمين المسجلين على المنصة
+user.new.title : إضافة مستخدم
+new user: إضافة مستخدم جديد
+edit user: تحرير مستخدم
+profile show username: إسم المستخدم
+profile show email: البريد الإلكتروني
+profile: الحساب الشخصي
+activities: الأنشطة
+change password: تغير الرمز السري
+profile show roles: الأدوار
+Username: المستخدم
+Password: كلمة السر
+Repeat Password: إعادة كلمة السر
+Email: البريد الإلكتروني
+Status: الحالة
+is Active: مفعل 
+not Active: غير مفعل
+No records found: لا توجد أي سجلات
+Admin: مشرف
+User: مستخدم
+role admin: مشرف
+email: البريد الإلكتروني
+Role: الدور
+Roles: الدور
+Enabled: مفعل
+Yes: نعم
+No: لا
+Last Time login: آخر مرت قام بالدخول للمنصة  
+Never been logged in yet: لم يقم بتسجيل دخوله حتى الأن
+Go Back: قائمة المستخدمين
+edit_profile: تحرير الملف الشخصي
+Cancel: إلغاء
+Submit: تثبيت
+change_password : تغيير كلمة السرية الخاصة بحسابي
+resetting:
+    check_email: |
+        لقد تم إرسال رسالة إلكترونية تحتوي على رابط يجب الضغط عليه لإعادة ضبط كلمة المرور الخاصة بك.
+        ملحوظة: يمكنك إعادة ضبط كلمة المرور الخاصة بك خلال %tokenLifetime% ساعة
+
+        يرجى التحقق من ملف السبام إذا لم تستقبل الرسالة الإلكترونية قريبا أو أعد المحاولة

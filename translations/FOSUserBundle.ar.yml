@@ -1,0 +1,8 @@
+security:
+    login:
+        forgotten_password: 'هل نسيت كلمة السر ؟'
+resetting.request.submit: إسترجاع كلمة المرور
+resetting.request.username: إسم المستخدم او البريد الإلكتروني
+layout.login: تسجيل الدخول
+layout.logout: الخروج
+layout.logged_in_as: متصل تحت إسم 

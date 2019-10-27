@@ -1,0 +1,132 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'user' %}
+
+{% block title %} {{ 'users.show.title' | trans }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <h1 class="page-title">
+            {{ 'users.show.title' | trans }}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+            <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
+            <li class="active">{{ 'users.show.title' | trans }}</li>
+        </ol>
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="row row-cards">
+        <div class="col-12">
+
+            <div class="card">
+                <!-- Card Header -->
+                <div class="card-header isolated">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#student">{{'users.show.userInfo'|trans}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cert">{{'users.show.accountInfo'|trans}}</a>
+                        </li>
+                    </ul>
+                    <div class="card-options">
+                        <a href="{{ path('fos_user_change_password') }}" class="btn btn-sm btn-bitbucket mr-2"><i class="fe fe-lock"></i> {{'users.actions.change_password'|trans}}</a>
+                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-warning mr-2"><i class="fe fe-edit"></i> {{'edit'|trans({},'actions')}}</a>
+                        {#                        {{ include('student/_delete_form.html.twig') }}#}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <!-- Card Body -->
+                <div class="card-body card-tab">
+                    <div class="tab-content">
+                        <div class="tab-pane container active" id="student">
+                            {% include 'users/tabs/show_info.html.twig' %}
+                        </div>
+                        <div class="tab-pane container fade" id="cert">
+                            {% include 'users/tabs/show_account.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content2 %}
+    <div class="row col-12">
+
+        <div class="card">
+
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="card-options">
+                    <a href="{{ path('users_index') }}" class="btn btn-light mr-2 btn-sm">{{'Go Back'| trans}}</a>
+                    {% for role in app.user.roles %}
+                        {% if role|trim != 'ROLE_USER' %}
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-warning mr-2"><i class="fe fe-edit"></i> {{'edit'|trans({},'actions')}}</a>
+                            {{ include('users/_delete_form.html.twig') }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body card-tab">
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="student">
+                        <div class="table-responsive">
+                            <table class="table card-table table-striped table-vcenter">
+                                <tbody>
+                                <tr>
+                                    <th>{{ 'Username'| trans }}</th>
+                                    <td>{{ user.username }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Email'| trans }}</th>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                                                <tr>
+                                    <th>{{ 'Last Time login'| trans }}</th>
+                                    <td>{{ user.lastLogin == '' ?  'Never been logged in yet' | trans : user.lastLogin|date("j F Y , g:ia") }} </td>
+                                </tr>
+
+                                    <tr>
+                                        <th>{{ 'Role'| trans }}</th>
+                                        <td>{{ user.roles[0] | split('_', 2)| last =='ADMIN'? 'Admin'| trans :'User'| trans }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>{{ 'Status'| trans }}</th>
+                                        <td>{{ user.enabled == 1 ? 'is Active'| trans: 'not Active'| trans }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

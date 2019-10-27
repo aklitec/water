@@ -1,0 +1,17 @@
+security:
+    login:
+        login: 'Log in'
+        forgotten_password: 'Forgot your password'
+        username: Username
+        password: Password
+        remember_me: 'Remember me'
+        submit: 'Log in'
+resetting.request.submit: 'Reset Password'
+resetting.request.username: 'Username or email address'
+page.of: go back to
+layout.login: 'Log in'
+layout.logout: 'Log out'
+layout.logged_in_as: 'Logged in as'
+
+
+

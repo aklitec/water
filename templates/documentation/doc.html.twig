@@ -1,0 +1,121 @@
+{% extends 'layout.html.twig' %}
+{%  set locale = app.request.getLocale() %}
+{% if locale =="ar_MA" %}
+{% set path ='doc-ar'%}
+{% else %}
+{% set path ='doc-fr'%}
+{% endif %}
+{% trans_default_domain 'document' %}
+{% block pageHeader %}
+<style>
+    .imgs{
+        margin-bottom: 5px;
+        padding-bottom: 20px;
+        box-shadow: 1px 1px 3px gray;
+    }
+    .list-group:hover .list-group-item:hover{
+      background: rgba(70, 127, 207, 0.06);
+      font-weight: 600;
+      z-index: 2;
+      color: #467fcf;
+      
+    }
+    .list-group:hover .list-group-item:hover>.icon{
+      color: inherit !important;
+    }
+
+    {% if locale =="ar_MA" %}
+      .page-title{
+        font-weight:bold;
+      }
+
+    {% endif %}
+
+</style>
+    <div class="page-header">
+        <h1 class="page-title">
+            {{'documentation' | trans}}
+        </h1>
+    </div> 
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="my-3 my-md-5">
+        <div class="container">
+            <div class="row">
+              <div class="col-lg-3 order-lg-1 mb-4" style="flex:0 0 30% !important; max-width: 30%;">
+                <!-- Getting started -->
+                <div class="list-group list-group-transparent mb-0">
+                  <a href="#introduction" class="list-group-item list-group-item-action "><span class="icon mr-3"><i class="fe fe-flag"></i></span>{{'intro'| trans}}</a>
+                </div>
+                <!-- Components -->
+                <div class="list-group list-group-transparent mb-0">
+                  <a href="#createStudent" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-users"></i></span>{{'create new student'| trans}}</a>
+                  <a href="#createUser" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-user-plus"></i></span>{{'create new user'| trans}}</a>
+                  <a href="#printStudent" class="list-group-item list-group-item-action" style="display:flex"><span class="icon mr-3"><i class="fe fe-printer"></i></span>{{'print certificat'| trans}}</a>
+                  <a href="#settings" class="list-group-item list-group-item-action" style="display:flex"><span class="icon mr-3"><i class="fe fe-settings"></i></span><span>{{ 'add studylevel or branch'| trans}}</span></a>
+                </div>
+              </div>
+              <div class="col-lg-9" style="flex: 0 0 70% !important">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="text-wrap p-lg-6">
+                      <h2 class="mt-0 mb-4" id="introduction">{{'intro' | trans}}</h2>
+                      <p>{{'intro.p1'| trans}}</p>
+                      <h3 id="createStudent">{{'create new student' | trans}}</h3>
+                      <p>{{'create new student.p1' |  trans}}</p>
+                      <p>{{'create new student.p2' |  trans}}</p>
+                      <p>{{'create new student.p3' |  trans}}</p>
+                      <img class="imgs" src="{{ asset('/app/img/'~ path ~'/0.png') }}" alt="">
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/2.png') }}" alt="">
+                      <p></p>
+                      <img class="imgs" src="{{ asset('/app/img/'~ path ~'/2-1.png') }}" alt="">
+                      <p></p>
+                      <p></p>
+                      <h3 id="createUser">{{'create new user'| trans}}</h3>
+                      <p>{{'create new user.p1'| trans}}</p>
+                      <p>{{'create new user.p2'| trans}}</p>
+                      <img class="imgs" src="{{ asset('/app/img/'~ path ~'/5.png') }}" alt="">
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/5-1.png') }}" alt="">
+                      <p></p>
+                      <h3 id="printStudent">{{'print certificat'| trans}}</h3>
+                      <p>{{'print certificat.p1'| trans}}</p>
+                      <img class="imgs" src="{{ asset('/app/img/'~ path ~'/3-0.png') }}" alt="">
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/3-1.png') }}" alt="">
+                      <p></p>
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/3-2.png') }}" alt="">
+                      <p></p>
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/3-3.png') }}" alt="">
+                      <p></p>
+                      <h3 id="settings">{{ 'add studylevel or branch'| trans}}</h3>
+                      <p>{{ 'add studylevel or branch.p1'| trans}}</p>
+                      <p>{{ 'add studylevel or branch.p2'| trans}}</p>
+                      <img class="imgs" src="{{ asset('/app/img/'~ path ~'/6.png') }}" alt="">
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/6-2.png') }}" alt="">
+                      <p></p>
+                      <p></p>
+                      <img  class="imgs" src="{{ asset('/app/img/'~ path ~'/6-3.png') }}" alt="">
+                      <p></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+</div>
+
+{% endblock %}
+

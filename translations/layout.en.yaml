@@ -1,0 +1,21 @@
+# General
+docs: Documentation
+
+# Profile
+user.profile: Profile
+user.settings: settings
+user.inbox: mailbox
+user.logout: Sign out
+
+# Locales
+locale.ar_MA: العربية
+locale.ar: العربية
+locale.en: English
+locale.fr: Français
+
+# NavBar
+nav.home: Home
+nav.dashboard: Dashboard
+nav.users: Users
+nav.docs: Documentation
+nav.conf: Configuration

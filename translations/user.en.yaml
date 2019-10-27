@@ -1,0 +1,89 @@
+# Entity
+users: Users
+
+# Pages
+users.index.title: Users list
+users.new.title: Add a new user
+users.edit.title: Edit a user
+users.show.title: User
+users.show.userInfo: User informations
+users.show.accountInfo: Account informations
+users.show.changePassword: Change password
+
+# Forms
+users.form.user: User
+users.form.id: Id
+users.form.username: Username
+users.form.email: Email
+users.form.fullName: Name
+users.form.status: Status
+users.form.role: Role
+users.form.activity: Activity
+user.labels.password: Password
+user.labels.password-repeat: Repeat password
+
+# Actions
+users.actions.add: Add a new user
+users.actions.search: Search
+users.actions.remove: Remove
+users.actions.delete: Delete
+users.actions.edit: Edit
+users.actions.cancel: Cancel
+users.actions.save: Save
+users.actions.submit: Submit
+users.actions.change_password: Change password
+users.actions.export.pdf: Export as PDF
+users.actions.export.excel: Export as Excel
+
+# Roles
+users.role.user: User
+users.role.admin: Admin
+users.role.super: Super admin
+
+# Flash messages
+users.flash.new.success: User added successfully
+users.flash.edit.success: User updated successfully
+users.flash.delete.success: User deleted successfully
+
+
+
+users index title: La liste des utilisateurs enregistrés sur la platform
+user.new.title: ajouter un utitlisateur
+new user: Ajouter un nouveau utilisateur
+edit user: Editer l'utilisateur
+profile show username: Nom de l'utilisateur
+profile show email: Adresse e-mail
+profile: Profil
+activities: Activités
+change password: changer le mot de passe
+profile show roles: Rôles
+Username: Utilisateur
+Password: Mot de passe
+Repeat Password: Retaper le mot de passe
+Email: E-mail
+Status: Statut
+Roles: Rôle
+is Active: est actif
+not Active: pas actif
+No records found: Aucun enregistrement trouvé
+Admin: Administrateur
+User: Utilisateur
+role admin: Administrateur
+Role: Rôle
+Enabled: Activate
+Yes: oui
+No: non
+Last Time login: Dernière connexion
+Never been logged in yet: Jamais encore été connecté
+Go Back: liste d'utilisateur
+edit_profile: Modifier le profil
+Cancel: Annuler
+Submit: Valider
+change_password: Changer le mot de passe de mon compte
+resetting:
+    check_email: |
+        Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
+        Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+
+        Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
+

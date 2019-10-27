@@ -1,0 +1,24 @@
+{% trans_default_domain 'user' %}
+
+{% if app.session.flashbag.peekAll()|length %}
+    <div class="alert alert-icon toast alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"></button>
+
+        {% if app.session.flashBag.has('info') %}
+            <i class="fe fe-bell mr-2 bg-info" aria-hidden="true"></i>
+            {% for msg in app.session.flashBag.get('info') %} {{ msg | trans | raw }} {% endfor %}
+        {% endif %}
+        {% if app.session.flashBag.has('warning') %}
+            <i class="fe fe-alert-circle mr-2 bg-warning" aria-hidden="true"></i>
+            {% for msg in app.session.flashBag.get('warning') %} {{ msg | trans | raw }} {% endfor %}
+        {% endif %}
+        {% if app.session.flashBag.has('success') %}
+            <i class="fe fe-check mr-2 bg-success" aria-hidden="true"></i>
+            {% for msg in app.session.flashBag.get('success') %} {{ msg | trans | raw }} {% endfor %}
+        {% endif %}
+        {% if app.session.flashBag.has('danger') %}
+            <i class="fe fe-alert-triangle mr-2 bg-danger" aria-hidden="true"></i>
+            {% for msg in app.session.flashBag.get('danger') %} {{ msg | trans | raw }} {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,0 +1,45 @@
+{% trans_default_domain 'user' %}
+
+<div class="table-responsive">
+
+    <div class="pic-info">
+        {% if user.avatar is not empty %}
+            <img src="{{ vich_uploader_asset(user, 'avatarFile') }}" alt="{{ user.fullName }}" />
+        {% else %}
+            <img alt="" src="/app/img/user.png">
+        {% endif %}
+    </div>
+
+    <table class="table card-table table-striped table-vcenter show-table">
+        <tbody>
+        <tr>
+            <th>{{ 'users.form.id'|trans }}</th>
+            <td><b>{{ user.id }}</b></td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.fullName'|trans }}</th>
+            <td>{{ user.fullName }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.email'|trans }}</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.role'|trans }}</th>
+            <td>
+                {% for role in user.roles %}
+                    <span class="tag">{{ role | upper }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.status'|trans }}</th>
+            <td><span class="tag tag-azure">{{ user.enabled == true ? 'enabled'| trans  : 'disabled' | trans }}</span></td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.activity'|trans }}</th>
+            <td>{{ user.lastLogin|ago }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

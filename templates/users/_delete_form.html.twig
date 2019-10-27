@@ -1,0 +1,17 @@
+{% trans_default_domain 'user' %}
+
+<form class="form-btn" method="post" action="{{ path('users_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this user?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+
+    {% if text is defined %}
+        <button class="btn btn-sm btn-danger" title="{{'users.actions.delete'|trans}}">
+            {{ 'users.actions.delete'|trans }} <i class="fe fe-trash"></i>
+        </button>
+    {% else %}
+        <button class="btn btn-sm btn-outline-danger" title="{{'users.actions.delete'|trans}}">
+            <i class="fe fe-trash"></i>
+        </button>
+    {% endif %}
+
+</form>

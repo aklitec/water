@@ -1,0 +1,13 @@
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "contact@aklitec.com"
+        sender_name: "Contact AKLITEC"
+    resetting:
+        email:
+            from_email: 
+                address:        noreply@ibschool.ma
+                sender_name:    No Reply
+        token_ttl: 0

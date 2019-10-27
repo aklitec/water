@@ -1,0 +1,40 @@
+users index title: La liste des utilisateurs enregistrés sur la platform
+user.new.title: ajouter un utitlisateur
+new user: Ajouter un nouveau utilisateur
+edit user: Editer l'utilisateur
+profile show username: Nom de l'utilisateur
+profile show email: Adresse e-mail
+profile: Profil
+activities: Activités
+change password: changer le mot de passe
+profile show roles: Rôles
+Username: Utilisateur
+Password: Mot de passe
+Repeat Password: Retaper le mot de passe
+Email: E-mail
+Status: Statut
+Roles: Rôle
+is Active: est actif
+not Active: pas actif
+No records found: Aucun enregistrement trouvé
+Admin: Administrateur
+User: Utilisateur
+role admin: Administrateur
+Role: Rôle
+Enabled: Activate
+Yes: oui
+No: non
+Last Time login: Dernière connexion
+Never been logged in yet: Jamais encore été connecté
+Go Back: liste d'utilisateur
+edit_profile: Modifier le profil
+Cancel: Annuler
+Submit: Valider
+change_password: Changer le mot de passe de mon compte
+resetting:
+    check_email: |
+        Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
+        Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+
+        Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
+

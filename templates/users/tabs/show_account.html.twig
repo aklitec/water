@@ -1,0 +1,24 @@
+{% trans_default_domain 'user' %}
+
+<div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter show-table">
+        <tbody>
+        <tr>
+            <th>{{ 'users.form.username'|trans }}</th>
+            <td><span class="tag">{{ user.username | lower }}</span></td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.email'|trans }}</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'users.form.role'|trans }}</th>
+            <td>
+                {% for role in user.roles %}
+                    <span class="tag">{{ role | upper }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

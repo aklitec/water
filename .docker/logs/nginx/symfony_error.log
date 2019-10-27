@@ -1,2 +1,73 @@
 2019/09/19 10:30:28 [error] 10#10: *1 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
 2019/09/19 10:31:04 [error] 10#10: *3 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/20 19:45:12 [error] 6#6: *13 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: Whitespace are not supported before the value in "/var/www/symfony/.env" at line 18.
+...n vars ###\nAPP_NAME= Water CMS\n###< Appl...
+                       ^ line 18 offset 794 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(257): Symfony\Component\Dotenv\Dotenv->createFormatException('Whitespace are ...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Component\Doten" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/20 19:45:23 [error] 6#6: *13 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...#\nAPP_NAME=Water CMS\n###< Application va...
+                       ^ line 18 offset 803 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Compon" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/21 11:45:42 [crit] 6#6: *98 open() "/var/tmp/nginx/fastcgi/1/00/0000000001" failed (13: Permission denied) while reading upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev", referrer: "http://app.dev/login"
+2019/09/29 11:42:33 [error] 6#6: *21 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...AME=Application name\n###< Application va...
+                      ^ line 18 offset 810 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Componen" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev", referrer: "http://app.dev/"
+2019/09/29 11:42:40 [error] 6#6: *21 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...AME=Application name\n###< Application va...
+                      ^ line 18 offset 810 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Componen" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET /login HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/29 11:42:47 [error] 6#6: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...AME=Application name\n###< Application va...
+                      ^ line 18 offset 810 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Componen" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET /login HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/29 11:42:47 [error] 6#6: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...AME=Application name\n###< Application va...
+                      ^ line 18 offset 810 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Componen" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"
+2019/09/29 11:42:48 [error] 6#6: *21 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\FormatException: A value containing spaces must be surrounded by quotes in "/var/www/symfony/.env" at line 18.
+...AME=Application name\n###< Application va...
+                      ^ line 18 offset 810 in /var/www/symfony/vendor/symfony/dotenv/Dotenv.php:477
+Stack trace:
+#0 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(326): Symfony\Component\Dotenv\Dotenv->createFormatException('A value contain...')
+#1 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(200): Symfony\Component\Dotenv\Dotenv->lexValue()
+#2 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(487): Symfony\Component\Dotenv\Dotenv->parse('# In all enviro...', '/var/www/symfon...')
+#3 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(65): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array)
+#4 /var/www/symfony/vendor/symfony/dotenv/Dotenv.php(85): Symfony\Component\Dotenv\Dotenv->load('/var/www/symfon...')
+#5 /var/www/symfony/config/bootstrap.php(17): Symfony\Componen" while reading response header from upstream, client: 172.19.0.1, server: app.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.4:9001", host: "app.dev"

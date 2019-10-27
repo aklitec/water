@@ -1,0 +1,91 @@
+{% trans_default_domain 'layout' %}
+
+{%  set locale = app.request.getLocale() %}
+
+<style type="text/css">
+    {% if locale =="ar_MA" %}
+        {% set classVar1 = '' %}
+        and{% set classVar2 = 'ml-auto' %}
+        and .d-flex {
+            flex-direction: row;
+            display: flex;
+        }
+        .header-brand {
+            margin-right: unset;
+            margin-left: auto !important
+        }
+        .dropdown-menu {
+            left: 115px !important;
+        }
+
+        .dropdown-menu-arrow.dropdown-menu-right::before {
+            right: 150px !important;
+
+        }
+        .dropdown-menu-arrow.dropdown-menu-right::before,
+        .dropdown-menu-arrow.dropdown-menu-right::after {
+            left: 30px !important;
+        }
+        .nav {
+            flex-direction: row-reverse !important;
+        }
+
+        .ml-auto {
+            margin-right: unset !important
+        }
+    {% else %}
+        {% set classVar1 = 'ml-auto' %}
+        and{% set classVar2 = '' %}
+    {% endif %}
+</style>
+
+<div class="header py-4">
+    <div class="container">
+        <div class="d-flex">
+            <a class="header-brand {{classVar2}}" href="{{ path('dashboard') }}">
+                <img src="{{ asset('/app/img/logo.png') }}" class="header-brand-img" alt="cert app">
+                {{ app_name }}
+            </a>
+            <div class="d-flex order-lg-2 {{classVar1}}">
+
+                <div class="dropdown">
+                    <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                        <span class="avatar" style="background-image: url({{ asset('/app/img/user.png') }}"></span>
+                        <span class="ml-2 d-none d-lg-block">
+                            <span class="text-default">
+                                <b>{{ app.user | capitalize }}</b>
+                            </span>
+                            <small class="text-muted d-block mt-1">
+                                {% for role in app.user.roles %}
+                                    {% if role|trim != 'ROLE_USER' %}
+                                        <small>
+                                            <span class="badge-default pl-1 pr-1">{{ role |split('_', 2) | last | trans }}</span>
+                                        </small>
+                                    {% endif %}
+                                {% endfor %}
+                            </small>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">
+                            <i class="dropdown-icon fe fe-user"></i>
+                            {{ 'user.profile' | trans}}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        {%  set currentLocale = app.request.getLocale() %}
+                        {% set next = app.request.requestUri %}
+                        {% set locales = ['ar_MA', 'en', 'fr'] %}
+                        {% for locale in locales|filter(locale => locale != currentLocale) -%}
+                            <a class="dropdown-item" href="{{ path('setting_locale', {'locale' : locale, 'next': next}) }}">
+                                <i class="dropdown-icon fe fe-globe"></i> {{ ('locale.' ~ locale) | trans}}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+            </a>
+        </div>
+    </div>
+</div>
