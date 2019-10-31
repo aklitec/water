@@ -4,7 +4,7 @@
 
     <div class="pic-info">
         {% if user.avatar is not empty %}
-            <img src="{{ vich_uploader_asset(user, 'avatarFile') }}" alt="{{ user.fullName }}" />
+            <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.fullName }}" />
         {% else %}
             <img alt="" src="/app/img/user.png">
         {% endif %}

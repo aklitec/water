@@ -32,6 +32,9 @@
                         <a href="/" class="nav-link {{ 'dashboard' in route ? 'active' }} " ><i class="fe fe-home"></i> {{ 'nav.dashboard' | trans}}</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ path('client_index') }}" class="nav-link {{ 'client_index' in route ? 'active' }} " ><i class="fe fe-user"></i> {{ 'nav.clients' | trans}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ path('users_index') }}" class="nav-link {{ 'users_index' in route ? 'active' }} " ><i class="fe fe-user"></i> {{ 'nav.users' | trans}}</a>
                     </li>
                     <li class="nav-item">

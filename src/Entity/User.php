@@ -1,8 +1,9 @@
 <?php
-// src/Entity/User.php
+///src/Entity/Userrr.php
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\File;
@@ -52,12 +53,13 @@ class User extends BaseUser
      */
     private $avatar;
 
+
     /**
-     * @ORM\Column(type="datetime")
-     *
+     * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
      * @var \DateTime
      */
     private $updatedAt;
+
 
     /**
      * @var boolean
@@ -83,8 +85,8 @@ class User extends BaseUser
     {
         $this->avatarFile = $avatarFile;
 
-        if (null !== $avatarFile) {
-            $this->updatedAt = new \DateTimeImmutable();
+        if ($avatarFile) {
+            $this->updatedAt = new \DateTime('now');
         }
     }
 
@@ -113,8 +115,18 @@ class User extends BaseUser
         return $this;
     }
 
+
+
+
+
+
+
+
     public function __toString()
     {
         return !empty($this->fullName) ? $this->fullName : $this->username;
     }
+
+
+
 }
