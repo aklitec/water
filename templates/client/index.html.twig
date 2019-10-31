@@ -1,0 +1,83 @@
+{% extends 'layout.html.twig' %}
+{% trans_default_domain 'client' %}
+{%  set locale = app.request.getLocale() %}
+{% if locale =="ar_MA"%}
+    {% set classVar2 ='direction:rtl' %}
+{% else %}
+    {% set classVar2 =''%}
+{% endif %}
+
+{% block title %}Client index{% endblock %}
+{% block pageHeader %}
+
+    <div class="page-header">
+        <h1 class="page-title">
+            {{ 'Client index' | trans }}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('client_index') }}"> {{ 'Client' | trans }} </a></li>
+            <li class="active">{{ 'client.index.title' | trans }}</li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <a href="{{ path('client_new') }}"  class="btn btn-pill btn-outline-primary">
+                <i class="fe fe-plus"></i> {{'client.actions.add'|trans}}
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                    <thead>
+                    <tr>
+                        <th class="col-2">Id</th>
+                        <th class="col-2">FirstName</th>
+                        <th class="col-2">LastName</th>
+                        <th>PhoneNumber</th>
+                        <th>Addresse</th>
+                        <th>CounterNumber</th>
+                        <th class="text-right">actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td >{{ client.id }}</td>
+                            <td>{{ client.firstName }}</td>
+                            <td>{{ client.lastName }}</td>
+                            <td>{{ client.phoneNumber }}</td>
+                            <td>{{ client.addresse }}</td>
+                            <td>{{ client.counterNumber }}</td>
+                            <td>
+                                <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-sm btn-outline-primary">{{'client.actions.show'|trans}}</a>
+                                <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning">{{'client.actions.edit'|trans}}</a>
+                                {{ include('client/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="14">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
