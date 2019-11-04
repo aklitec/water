@@ -16,6 +16,7 @@ locale.fr: Français
 # NavBar
 nav.home: Home
 nav.dashboard: Dashboard
+nav.clients: Clients
 nav.users: Users
 nav.docs: Documentation
 nav.conf: Configuration

@@ -30,6 +30,7 @@ class UserController extends AbstractController {
         $form->handleRequest($request);
 
         $getArgs = $request->query->get('user_finder');
+
         $users = $getArgs ? $repo->findAllMatched($getArgs, $page) : $repo->findLatest($page);
 
 		return $this->render('users/index.html.twig', ['users' => $users, 'form' => $form->createView()]);
