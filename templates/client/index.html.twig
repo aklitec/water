@@ -1,76 +1,146 @@
 {% extends 'layout.html.twig' %}
-{% trans_default_domain 'client' %}
-{%  set locale = app.request.getLocale() %}
-{% if locale =="ar_MA"%}
-    {% set classVar2 ='direction:rtl' %}
-{% else %}
-    {% set classVar2 =''%}
-{% endif %}
 
-{% block title %}Client index{% endblock %}
+{% trans_default_domain 'Client' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}{{ 'Client.index.title' | trans }}{% endblock %}
+
 {% block pageHeader %}
-
     <div class="page-header">
-        <h1 class="page-title">
-            {{ 'Client index' | trans }}
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ path('client_index') }}"> {{ 'Client' | trans }} </a></li>
-            <li class="active">{{ 'client.index.title' | trans }}</li>
-        </ol>
+        <div>
+            <h1 class="page-title">
+                {{ 'Client.index.header' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i>{{ 'Client.index.homepage' | trans }}</a></li>
+                <li><a href="{{ path('client_index') }}"> {{ 'Client.index.clients' | trans }} </a></li>
+                <li class="active">{{ 'Client.index.title' | trans }}</li>
+            </ol>
+        </div>
     </div>
 {% endblock %}
 
+
 {% block content %}
-    <div class="card">
-        <div class="card-header">
-            <a href="{{ path('client_new') }}"  class="btn btn-pill btn-outline-primary">
-                <i class="fe fe-plus"></i> {{'client.actions.add'|trans}}
-            </a>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
-                    <thead>
-                    <tr>
-                        <th class="col-2">Id</th>
-                        <th class="col-2">FirstName</th>
-                        <th class="col-2">LastName</th>
-                        <th>PhoneNumber</th>
-                        <th>Addresse</th>
-                        <th>CounterNumber</th>
-                        <th class="text-right">actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for client in clients %}
-                        <tr>
-                            <td >{{ client.id }}</td>
-                            <td>{{ client.firstName }}</td>
-                            <td>{{ client.lastName }}</td>
-                            <td>{{ client.phoneNumber }}</td>
-                            <td>{{ client.addresse }}</td>
-                            <td>{{ client.counterNumber }}</td>
-                            <td>
-                                <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-sm btn-outline-primary">{{'client.actions.show'|trans}}</a>
-                                <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning">{{'client.actions.edit'|trans}}</a>
-                                {{ include('client/_delete_form.html.twig') }}
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="14">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+    <div class="row row-cards">
+        <div class="col-12">
+            <div class="searchBox">
+                <form action="" class="searchBox-body">
+                    <div class="row" style="margin-bottom:-15px">
+                        {{ form_start(form, {'method': 'GET'}) }}
+                        {% set params = app.request.query.all %}
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                    {{ form_widget(form.cin, {value: params.client_finder.cin | default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-users"></i></span>
+                                    {{ form_widget(form.fullName, {value: params.client_finder.fullName| default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-mail"></i></span>
+                                    {{ form_widget(form.phoneNumber, {value: params.client_finder.phoneNumber| default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6 text-right">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-block btn-outline-dark"><i class="fe fe-search"></i> {{'Client.actions.search'|trans}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Content -->
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-btn">
+                        <a href="{{ path('client_new') }}"  class="btn btn-pill btn-outline-primary">
+                            <i class="fe fe-plus"></i> {{'Client.actions.add'|trans}}
+                        </a>
+                        <a href="{{ path('client_new') }}"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
+                            <i class="fe fe-file"></i> {{'Client.actions.export.pdf'|trans}}
+                        </a>
+                        <a href="{{ path('client_new') }}"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
+                            <i class="fe fe-file-text"></i> {{'Client.actions.export.excel'|trans}}
+                        </a>
+                    </h3>
+                    <div class="card-options">
+                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                        <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                            <thead>
+                            <tr>
+                                <th class="col-2">{{ 'Client.form.cin' | trans }}</th>
+                                <th>{{ 'Client.form.fullName' | trans }}</th>
+                                <th>{{ 'Client.form.phoneNumber'| trans  }}</th>
+                                <th>{{ 'Client.form.address'| trans  }}</th>
+                                <th class="text-right"> {{ 'Client.form.actions'| trans  }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td class="text-center">
+                                        {% if client.image is not empty %}
+                                            {% set image = vich_uploader_asset(client, 'imageFile') %}
+                                        {% else %}
+                                            {% set image = '/app/img/user.png' %}
+                                        {% endif %}
+                                        <div class="avatar d-block" style="background-image: url({{ image }})">
+                                            <span class="avatar-status bg-green"></span>
+                                            <span class="tag">{{ client.cin | lower }}</span>
+                                        </div>
+                                    </td>
+                                    <td>{{ client.fullName | capitalize }}</td>
+                                    <td>{{ client.phoneNumber }}</a></td>
+                                    <td>{{ client.address }}</a></td>
+                                    <td class="text-right">
+                                        <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-sm btn-outline-primary" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
+                                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'edit'|trans({},'actions')}}"><i class="fe fe-edit"></i></a>
+                                        {{ include('client/_delete_form.html.twig') }}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="14">{{'Client.index.noData'|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% if clients.haveToPaginate %}
+                    <div class="card-footer pagination">
+                        {{
+                        pagerfanta(client, 'twitter_bootstrap4_translated', {
+                            routeName: 'client_index_paginated',
+                            routeParams: app.request.query.all
+                        })
+                        }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
-
-
-
-
 {% endblock %}
 
 

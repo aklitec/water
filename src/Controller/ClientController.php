@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Client;
-use App\Form\ClientType;
+use App\Form\Client\ClientFinderType;
+use App\Form\Client\ClientType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,33 +12,42 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/client")
+ * @Route("/Client")
  */
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/", name="client_index", methods={"GET"})
+     * @Route("/", defaults={"page": "1"} , name="client_index", methods={"GET"})
+     * @Route("/page/{page<[1-9]\d*>}", name="client_index_paginated", methods="GET")
+     * @param Request $request
+     * @param ClientRepository $clientRepository
+     * @param $page
+     * @return Response
      */
-    public function index(ClientRepository $clientRepository): Response
+    public function index(Request $request, ClientRepository $clientRepository, int $page): Response
     {
+        $form = $this->createForm(ClientFinderType::class, new Client());
+        $form->handleRequest($request);
+
+        $getArgs= $request->query->get('client_finder');
+        $clients = $getArgs ? $clientRepository->findMatchedClients($getArgs, $page) : $clientRepository->findLatestClients($page);
         return $this->render('client/index.html.twig', [
-            'clients' => $clientRepository->findAll(),
+            'clients' => $clients,
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/new", name="client_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         $client = new Client();
-        $dateTimeNow = new \DateTime('now');
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-        if($client->getCreatedAt()===null){
-            $client->setCreatedAt($dateTimeNow);
-            $client->setUpdatedAt($dateTimeNow);
-        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);
@@ -54,6 +64,8 @@ class ClientController extends AbstractController
 
     /**
      * @Route("/{id}", name="client_show", methods={"GET"})
+     * @param Client $client
+     * @return Response
      */
     public function show(Client $client): Response
     {
@@ -64,17 +76,19 @@ class ClientController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="client_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Client $client
+     * @return Response
      */
     public function edit(Request $request, Client $client): Response
     {
         $form = $this->createForm(ClientType::class, $client);
-        $dateTimeNow = new \DateTime('now');
         $form->handleRequest($request);
-        $client->setUpdatedAt($dateTimeNow);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client_show',['id' => $client->getId()]);
         }
 
         return $this->render('client/edit.html.twig', [
@@ -85,6 +99,9 @@ class ClientController extends AbstractController
 
     /**
      * @Route("/{id}", name="client_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Client $client
+     * @return Response
      */
     public function delete(Request $request, Client $client): Response
     {

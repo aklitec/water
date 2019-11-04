@@ -37,6 +37,9 @@
 	background-color: #007bff!important;
 	border-color: #007bff!important;
 }
+.page-title{
+    margin-bottom: 10px;
+}
 .page-header .breadcrumb {
     font-size: 13px;
     margin-left: auto !important;

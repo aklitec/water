@@ -1,0 +1,42 @@
+#----------index-----------------
+Client.index.title : Clients page
+Client.index.header: List of our clients
+Client.index.homepage: Home
+Client.index.clients: Clients
+Client.actions.search: Search
+Client.actions.add: Add Client
+Client.actions.export.pdf: Export as Pdf
+Client.actions.export.excel: Export as Excel
+Client.form.cin: C.I.N
+Client.form.fullName: Full Name
+Client.form.firstName: First Name
+Client.form.lastName: Last Name
+Client.form.address: Address
+Client.form.id: Client ID
+Client.form.image: Photo of the client
+Client.form.phoneNumber: Phone number
+Client.form.actions: Actions
+Client.index.noData: No data found
+Client.actions.delete: Delete
+Client.index.confirmDeleteMsg:  Are you sure you want to delete this item?
+
+
+#----------new Client-----------------
+
+Client.new: New client
+Client.new.title: Add new client
+Client.form.infos: informaitions about the new client
+Client.actions.cancel: Cancel
+Client.actions.save: Save
+
+
+#---------- show Client ---------------
+
+Client.show.title: infos about the client
+Client.show.clientInfo: About client
+
+#------------ edit Client ----------
+
+Client.edit: Edit page
+Client.edit.title: Edit informations about client
+form.label.delete: delete image

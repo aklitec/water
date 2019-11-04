@@ -2,20 +2,23 @@
 
 {% trans_default_domain 'user' %}
 
+
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block title %} {{ 'users.edit.title' | trans }} {% endblock %}
 
 {% block pageHeader %}
     <div class="page-header">
-        <h1 class="page-title">
-            {{ 'users.edit.title' | trans }}
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
-            <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
-            <li class="active">{{ 'users.edit.title' | trans }}</li>
-        </ol>
+        <div>
+            <h1 class="page-title">
+                {{ 'users.edit.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
+                <li class="active">{{ 'users.edit.title' | trans }}</li>
+            </ol>
+        </div>
     </div>
 {% endblock %}
 
@@ -29,7 +32,7 @@
             <div class="card-header isolated">
                 <h3 class="card-title">{{ 'users.edit.title' | trans}}</h3>
                 <div class="card-options">
-                    {{ include('users/_delete_form.html.twig', {text: true }) }}
+                    {{ include('users/delete_form.html.twig', {text: true }) }}
                 </div>
             </div>
         </div>

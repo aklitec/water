@@ -1,88 +1,78 @@
 
-
-{# {{ include('client/_form.html.twig') }}#}
-
-
 {% extends 'layout.html.twig' %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% trans_default_domain 'Client' %}
-{%  set locale = app.request.getLocale() %}
-{% if locale =="ar_MA"%}
-    {% set classVar2 ='direction:rtl' %}
-{% else %}
-    {% set classVar2 =''%}
-{% endif %}
 
-{% block title %}New Client{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% trans_default_domain 'Client' %}
+
+{% block title %}{{ 'Client.new' | trans }}{% endblock %}
+
 {% block pageHeader %}
     <div class="page-header">
-        <h1 class="page-title">
-            {{ 'client.new' | trans }}
-        </h1>
+        <div>
+            <h1 class="page-title">
+                {{ 'Client.new' | trans }}
+            </h1>
 
-        <ol class="breadcrumb">
-            <li><a href="{{ path('client_index') }}"> {{ 'Client' | trans }} </a></li>
-            <li class="active">{{ 'client.index.title' | trans }}</li>
-        </ol>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i>{{ 'Client.index.homepage' | trans }}</a></li>
+                <li><a href="{{ path('client_index') }}"> {{ 'Client.index.clients' | trans }} </a></li>
+                <li class="active">{{ 'Client.new.title' | trans }}</li>
+            </ol>
+        </div>
     </div>
 {% endblock %}
 
 {% block content %}
-        <div class="row row-cards">
-            <div class="col-12">
+    <div class="row row-cards">
+        <div class="col-12">
 
-                <div class="card">
-                    <div class="card-header isolated">
-                        <h3 class="card-title"> {{ 'client.new.title' | trans }} </h3>
-                    </div>
+            <div class="card">
+                <div class="card-header isolated">
+                    <h3 class="card-title"> {{ 'Client.new.title' | trans }} </h3>
                 </div>
-
-                {{ form_start(form) }}
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-body-title">{{ 'client.show.clientInfo'|trans }}<div class="pull-right"></div></div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.firstName) }}</div>
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.lastName) }}</div>
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.imageFile) }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.addresse) }}</div>
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.phoneNumber) }}</div>
-                            <div class="col-md-6 col-sm-12">{{ form_row(form.counterNumber) }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-footer isolated">
-                        <div class="d-flex">
-                            <a href="{{ path('client_index') }}" class="btn btn-link">{{'client.actions.cancel'|trans}}</a>
-                            <button type="submit" class="btn btn-primary ml-auto"> <i class="fe fe-save"></i> {{'client.actions.save'|trans}}</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{ form_end(form) }}
-
             </div>
+
+            {{ form_start(form) }}
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body-title">{{ 'Client.form.infos'|trans }}<div class="pull-right"></div></div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.firstName) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.lastName) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.cin) }}</div>
+
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.imageFile)}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.phoneNumber) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address) }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-footer isolated">
+                    <div class="d-flex">
+                        <a href="{{ path('client_index') }}" class="btn btn-link">{{'Client.actions.cancel'|trans}}</a>
+                        <button type="submit" class="btn btn-primary ml-auto"> <i class="fe fe-save"></i> {{'Client.actions.save'|trans}}</button>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
 
         </div>
 
+    </div>
+
 {% endblock %}
-
-
-
-
-
-
-
 
 
 

@@ -4,18 +4,21 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
+
 {% block title %} {{ 'users.index.title' | trans }} {% endblock %}
 
 {% block pageHeader %}
-   <div class="page-header">
-        <h1 class="page-title">
-            {{ 'users.index.title' | trans }}
-        </h1>
-       <ol class="breadcrumb">
-           <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
-           <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
-           <li class="active">{{ 'users.index.title' | trans }}</li>
-       </ol>
+    <div class="page-header">
+     <div>
+         <h1 class="page-title">
+             {{ 'users.index.title' | trans }}
+         </h1>
+         <ol class="breadcrumb">
+             <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+             <li><a href="{{ path('users_index') }}"> {{ 'users' | trans }} </a></li>
+             <li class="active">{{ 'users.index.title' | trans }}</li>
+         </ol>
+     </div>
    </div>
 {% endblock %}
 
@@ -122,7 +125,7 @@
                                 <td class="text-right">
                                     <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-primary" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
                                     <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'edit'|trans({},'actions')}}"><i class="fe fe-edit"></i></a>
-                                    {{ include('users/_delete_form.html.twig') }}
+                                    {{ include('users/delete_form.html.twig') }}
 
                                 </td>
                             </tr>
@@ -146,110 +149,6 @@
                     </div>
                 {% endif %}
             </div>
-        </div>
-    </div>
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% block content2 %}
-    <div class="row col-12">
-
-        {{ dump(users) }}
-        <!-- List card -->
-        <div class="card">
-
-            <div class="card-header">
-                <h3 class="card-title">{{ 'users index title' | trans }}</h3>
-                <div class="card-options">
-                    {% for role in app.user.roles %}
-                        {% if role|trim != 'ROLE_USER' %}
-                            <a href="{{ path('user_new') }}"  class="btn btn-primary">
-                                 <i class="fe fe-plus"></i> {{'add'|trans({},'actions')}}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-
-
-                    <table class="table card-table table-striped table-vcenter">
-                        <thead>
-                        <tr>
-                            <th>{{ 'Username' | trans }}</th>
-                            <th>{{ 'email'| trans  }}</th>
-                            <th>{{ 'Status'| trans  }}</th>
-                            <th>{{ 'Role'| trans  }}</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for user in users %}
-                            <tr>
-                                <td>{{ user.username}}</td>
-                                <td>{{ user.email }}</a></td>
-                                <td>{{ user.enabled == true ? 'is Active'| trans  : 'not Active' | trans }}</a></td>
-                                <td>
-                                    <small>
-                                        <span class="badge-default pl-1 pr-1">{{user.roles[0]|split('_', 2)|last=='ADMIN'? 'Admin'|trans :'User'|trans }}</span>
-                                    </small>
-                                </td>
-                                <td>
-                                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-sm btn-primary"><i class="fe fe-eye"></i> {{'show'|trans({},'actions')}}</a>
-                                {% for role in app.user.roles %}
-                                     {% if role|trim != 'ROLE_USER' %}
-                                          <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-warning"><i class="fe fe-edit"></i> {{'edit'|trans({},'actions')}}</a>
-                                            {{ include('users/_delete_form.html.twig') }}
-                                    {% endif %}
-                                {% endfor %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-
-            {% if users.haveToPaginate %}
-                <div class="card-footer text-right">
-                    {{
-                        pagerfanta(users, 'twitter_bootstrap4_translated', {
-                            routeName: 'user_index_paginated',
-                            routeParams: app.request.query.all
-                        })
-                    }}
-                </div>
-            {% endif %}
         </div>
     </div>
 {% endblock %}
