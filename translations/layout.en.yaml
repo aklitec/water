@@ -15,6 +15,7 @@ locale.fr: Français
 
 # NavBar
 nav.home: Home
+nav.waterMeters: WaterMeters
 nav.dashboard: Dashboard
 nav.clients: Clients
 nav.users: Users

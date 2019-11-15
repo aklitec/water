@@ -1,0 +1,151 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'WaterMeters' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %} {{ 'WaterMeters.show.title' | trans }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'WaterMeters.show.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('water_meter_index') }}"> {{ 'WaterMeters.iedex' | trans }} </a></li>
+                <li class="active">{{ 'WaterMeters.show.title' | trans }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<div class="row row-cards">
+    <div class="col-12">
+        <div class="searchBox">
+            <form action="" class="searchBox-body">
+                <div class="row" style="margin-bottom:-15px">
+                    {{ form_start(form, {'method': 'GET'}) }}
+
+                    {% set params = app.request.query.all %}
+
+                    <div class="col-md col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <span class="input-icon-addon"><i class="fe fe-info"></i></span>
+                                {{ form_widget(form.cin, {value: params.client_finder.cin | default('') }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <span class="input-icon-addon"><i class="fe fe-code"></i></span>
+                                {{ form_widget(form.code, {value: params.client_finder.code| default('') }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <span class="input-icon-addon"><i class="fe fe-phone-call"></i></span>
+                                {{ form_widget(form.phoneNumber, {value: params.client_finder.phoneNumber | default('') }) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                {{ form_widget(form.fullName, {value: params.client_finder.fullName| default('') }) }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2 col-sm-6 text-right">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-dark"><i class="fe fe-search"></i> {{'WaterMeters.actions.search'|trans}}</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </form>
+        </div>
+
+        <!-- Content -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-btn">
+                    <a href="#"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
+                        <i class="fe fe-file"></i> {{'WaterMeters.actions.export.pdf'|trans}}
+                    </a>
+                    <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
+                        <i class="fe fe-file-text"></i> {{'WaterMeters.actions.export.excel'|trans}}
+                    </a>
+                </h3>
+                <div class="card-options">
+                    <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                    <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+                    <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                    <thead>
+                    <tr>
+                        <th >{{ 'WaterMeters.form.code' | trans }}</th>
+                        <th>{{ 'WaterMeters.form.setupDate' | trans }}</th>
+                        <th>{{ 'WaterMeters.form.createdAt'| trans  }}</th>
+                        <th class="col-2">{{ 'WaterMeters.form.active'| trans  }}</th>
+                        <th class="text-right"> {{ 'WaterMeters.form.actions'| trans  }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for waterMeter in WaterMeters %}
+                        <tr>
+                            <td> <span class="tag">{{ waterMeter.code | lower }}</span></td>
+                            <td>{{ waterMeter.setupDate | date }}</td>
+                            <td>{{ waterMeter.createdAt | date }}</td>
+                            <td class="text-center">
+                                <div class="avatar d-block">
+                                    <span class="avatar-status bg-green"></span>
+                                    <span class="tag">{{ waterMeter.active ? 'Active' : 'Disactivated'| capitalize}}</span>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <a href="{{ path('consumption_index', {'id': waterMeter.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
+                       {#         {%   include('water_meter/_delete_form.html.twig') %}#}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="14">{{'WaterMeters.index.noData'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+             </div>
+
+            {% if WaterMeters.haveToPaginate %}
+                <div class="card-footer pagination">
+
+                    {{
+                    pagerfanta(WaterMeters, 'twitter_bootstrap4_translated', {
+                        routeName: '/water_meter_index_paginated',
+                        routeParams:{}
+                    })
+                    }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

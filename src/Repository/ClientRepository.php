@@ -26,6 +26,8 @@ class ClientRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->orderBy('e.id', 'DESC');
+        $qb->orWhere('e.deleted= :false')
+            ->setParameter('false', false);
         return  $this->createPaginator($qb->getQuery(),$page);
 
     }
@@ -53,16 +55,15 @@ class ClientRepository extends ServiceEntityRepository
             ->createQueryBuilder('c')
             ->orderBy('c.id', 'DESC');
         if (!empty($x = trim($query['cin']))) {
-            $qb->orWhere('c.cin LIKE :cin')
-                ->setParameter('cin', '%' . $x . '%');
+            $qb->orWhere('c.cin = :cin')
+                ->setParameter('cin', $x );
         }
         if (!empty($x = trim($query['fullName']))) {
             $qb->orWhere('c.fullName LIKE :fullName')
                 ->setParameter('fullName', '%' . $x . '%');
         }
         if (!empty($x = trim($query['phoneNumber']))) {
-            // $qb->andWhere('s.cne = :scne')->setParameter('scne', $x);
-            $qb->orWhere('c.email LIKE :phoneNumber')->setParameter('phoneNumber', '%' . $x . '%');
+            $qb->orWhere('c.phoneNumber = :phoneNumber')->setParameter('phoneNumber', $x );
         }
         return $this->createPaginator($qb->getQuery(),$page);
     }

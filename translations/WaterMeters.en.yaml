@@ -1,0 +1,41 @@
+#----------index-----------------
+WaterMeters.iedex: Water Meters
+WaterMeters.index.title : Water meters page
+WaterMeters.index.header: List of water meters
+WaterMeters.index.homepage: Home
+WaterMeters.index.WaterMeters: Water Meters
+WaterMeters.actions.search: Search
+WaterMeters.actions.add: Add a Water Meter
+WaterMeters.actions.export.pdf: Export as Pdf
+WaterMeters.actions.export.excel: Export as Excel
+WaterMeters.form.createdAt: Created At
+WaterMeters.form.setupDate: Installation date
+WaterMeters.form.cin: CIN
+WaterMeters.form.code: Code
+WaterMeters.form.active: Status
+WaterMeters.form.actions: Actions
+WaterMeters.index.noData: No data found
+WaterMeters.actions.delete: Delete
+WaterMeters.index.confirmDeleteMsg:  Are you sure you want to delete this item?
+
+
+#----------new WaterMeter-----------------
+
+WaterMeters.new: New water meter
+WaterMeters.new.title: Add new water meter
+WaterMeters.actions.cancel: Cancel
+WaterMeters.actions.save: Save
+WaterMeters.index.setupDate: Installation date
+WaterMeters.index.active: Active this Water Meter
+
+#---------- show WaterMeter ---------------
+
+WaterMeters.show.address: Address information
+WaterMeters.show.title: infos about the water meter
+WaterMeters.show.clientInfo: About water meter
+WaterMeters.show.WaterMeters: Owned water meters
+
+#------------ edit WaterMeter ----------
+
+WaterMeters.edit: Edit page
+WaterMeters.edit.title: Edit informations about this water meter

@@ -1,19 +1,19 @@
 {% extends 'layout.html.twig' %}
 
-{% trans_default_domain 'Client' %}
+{% trans_default_domain 'clients' %}
 
-{% block title %} {{ 'Client.show.title' | trans }} {% endblock %}
+{% block title %} {{ 'clients.show.title' | trans }} {% endblock %}
 
 {% block pageHeader %}
     <div class="page-header">
         <div>
             <h1 class="page-title">
-                {{ 'Client.show.title' | trans }}
+                {{ 'clients.show.title' | trans }}
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
-                <li><a href="{{ path('client_index') }}"> {{ 'Client' | trans }} </a></li>
-                <li class="active">{{ 'Client.show.title' | trans }}</li>
+                <li><a href="{{ path('client_index') }}"> {{ 'clients' | trans }} </a></li>
+                <li class="active">{{ 'clients.show.title' | trans }}</li>
             </ol>
         </div>
     </div>
@@ -22,13 +22,16 @@
 {% block content %}
     <div class="row row-cards">
         <div class="col-12">
-
             <div class="card">
                 <!-- Card Header -->
                 <div class="card-header isolated">
                     <ul class="nav nav-tabs card-header-tabs">
+
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#student">{{'Client.show.clientInfo'|trans}}</a>
+                            <a class="nav-link active" data-toggle="tab" href="#waterMeter">{{'clients.show.waterMeters'|trans}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#student">{{'clients.show.clientInfo'|trans}}</a>
                         </li>
                     </ul>
                     <div class="card-options">
@@ -43,7 +46,7 @@
                 <!-- Card Body -->
                 <div class="card-body card-tab">
                     <div class="tab-content">
-                        <div class="tab-pane container active" id="student">
+                        <div class="tab-pane container fade" id="student">
                             <div class="table-responsive">
                                 <div class="pic-info">
                                     {% if client.image is not empty %}
@@ -55,35 +58,37 @@
                                 <table class="table card-table table-striped table-vcenter show-table">
                                     <tbody>
                                     <tr>
-                                        <th>{{ 'Client.form.id'|trans }}</th>
+                                        <th>{{ 'clients.form.id'|trans }}</th>
                                         <td><span class="tag">{{ client.id | lower }}</span></td>
                                     </tr>
                                     <tr>
-                                        <th>{{ 'Client.form.cin'|trans }}</th>
+                                        <th>{{ 'clients.form.cin'|trans }}</th>
                                         <td>{{ client.cin }}</td>
                                     </tr>
                                     <tr>
-                                        <th>{{ 'Client.form.firstName'|trans }}</th>
+                                        <th>{{ 'clients.form.firstName'|trans }}</th>
                                         <td><span class="tag">{{ client.firstName | lower }}</span></td>
                                     </tr>
                                     <tr>
-                                        <th>{{ 'Client.form.lastName'|trans }}</th>
+                                        <th>{{ 'clients.form.lastName'|trans }}</th>
                                         <td>{{ client.lastName }}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>{{ 'Client.form.phoneNumber'|trans }}</th>
+                                        <th>{{ 'clients.form.phoneNumber'|trans }}</th>
                                         <td>{{ client.phoneNumber }}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>{{ 'Client.form.address'|trans }}</th>
+                                        <th>{{ 'clients.form.address'|trans }}</th>
                                         <td>{{ client.address}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
+                        {{ include('client/waterMeter/index.html.twig') }}
                     </div>
                 </div>
             </div>

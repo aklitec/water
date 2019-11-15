@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Client;
 use App\Form\Client\ClientFinderType;
 use App\Form\Client\ClientType;
 use App\Repository\ClientRepository;
+use App\Repository\WaterMeterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +20,10 @@ class ClientController extends AbstractController
 {
     /**
      * @Route("/", defaults={"page": "1"} , name="client_index", methods={"GET"})
-     * @Route("/page/{page<[1-9]\d*>}", name="client_index_paginated", methods="GET")
+     * @Route("{id}/page/{page<[1-9]\d*>}", name="client_index_paginated", methods="GET")
      * @param Request $request
      * @param ClientRepository $clientRepository
-     * @param $page
+     * @param int $page
      * @return Response
      */
     public function index(Request $request, ClientRepository $clientRepository, int $page): Response
@@ -31,11 +33,15 @@ class ClientController extends AbstractController
 
         $getArgs= $request->query->get('client_finder');
         $clients = $getArgs ? $clientRepository->findMatchedClients($getArgs, $page) : $clientRepository->findLatestClients($page);
+
+
         return $this->render('client/index.html.twig', [
             'clients' => $clients,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
      * @Route("/new", name="client_new", methods={"GET","POST"})
@@ -49,6 +55,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);
             $entityManager->flush();
@@ -65,11 +72,18 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}", name="client_show", methods={"GET"})
      * @param Client $client
+     * @param WaterMeterRepository $waterMeterRepository
+     * @param Request $request
      * @return Response
      */
-    public function show(Client $client): Response
+    public function show(Client $client , WaterMeterRepository $waterMeterRepository , Request $request): Response
     {
+
+        $args = $client->getId();
+        $waterMeters = $waterMeterRepository->findAllWaterMetersByClient($args);
+
         return $this->render('client/show.html.twig', [
+            'waterMeters'=>$waterMeters,
             'client' => $client,
         ]);
     }
@@ -82,6 +96,7 @@ class ClientController extends AbstractController
      */
     public function edit(Request $request, Client $client): Response
     {
+
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
@@ -106,8 +121,9 @@ class ClientController extends AbstractController
     public function delete(Request $request, Client $client): Response
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
+
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($client);
+            $client->setDeleted(true);
             $entityManager->flush();
         }
 

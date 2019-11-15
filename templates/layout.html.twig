@@ -53,6 +53,24 @@
                 .find('.custom-file-label')
                 .html(inputFile.files[0].name);
         });
+        $(document).ready(function() {
+
+         //   $("#consumption_currentRecord").prop('readonly', true);
+
+
+
+            $("#consumption_currentRecord").change(function(e){
+                $("#consumption_consumption").val($("#consumption_currentRecord").val()-$("#consumption_previousRecord").val());
+                let cc = $("#consumption_consumption").val();
+                let cpm = 5;
+                if (cc <= 5){
+                    cpm=5
+                }else{
+                    cpm=7
+                }
+                $("#consumption_costPerMeterCube").val(cpm)
+            });
+        })
     </script>
 
 {% endblock %}
