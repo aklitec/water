@@ -32,7 +32,6 @@
 {% block body %}{% endblock %}
 {% block javascripts %}
     <script>
-        console.log('hi');
         $('.custom-file-input').on('change', function(event) {
             const inputFile = event.currentTarget;
             console.log('hello');
@@ -40,6 +39,9 @@
                 .find('.custom-file-label')
                 .html(inputFile.files[0].name);
         });
+
+
+
     </script>
 {% endblock %}
 </body>

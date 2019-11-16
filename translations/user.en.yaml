@@ -9,7 +9,7 @@ users.show.title: User
 users.show.userInfo: User informations
 users.show.accountInfo: Account informations
 users.show.changePassword: Change password
-
+users.index.confirmDeleteMsg:  Are you sure you want to delete this item?
 # Forms
 users.form.user: User
 users.form.id: Id

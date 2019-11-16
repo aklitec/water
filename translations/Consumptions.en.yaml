@@ -1,0 +1,49 @@
+#----------index-----------------
+Consumptions.iedex: Consumptions
+Consumptions.index.title : Consumption page
+Consumptions.index.header: List of consumptions
+Consumptions.index.homepage: Home
+Consumptions.index.Consumptions: Consumptions
+Consumptions.actions.search: Search
+Consumptions.actions.add: Add a consumption
+Consumptions.actions.export.pdf: Export as Pdf
+Consumptions.actions.export.excel: Export as Excel
+Consumptions.form.createdAt: Created date
+Consumptions.form.previousRecord: Previous record
+Consumptions.form.date : Date release
+Consumptions.form.code: Code
+Consumptions.form.currentRecord: Curent Record
+Consumptions.form.consumption: Consumption
+Consumptions.form.status: Status
+Consumptions.form.cost: Cost
+Consumptions.form.year.title: Consumtpion list of
+Consumptions.form.infos: informaitions about the new consumption
+Consumptions.isDeleted.true: Active
+Consumptions.isDeleted.false: Suspended
+Consumptions.form.actions: Actions
+Consumptions.index.noData: No data found
+
+Consumptions.actions.delete: Delete
+
+Consumptions.index.confirmDeleteMsg:  Are you sure you want to delete this item?
+
+
+#----------new consumption-----------------
+
+Consumptions.new: New consumption
+Consumptions.new.title: Add new consumption
+Consumptions.actions.cancel: Cancel
+Consumptions.actions.save: Save
+
+
+#---------- show Consumption ---------------
+
+Consumptions.show.address: Address information
+Consumptions.show.title: infos about the consumption
+Consumptions.show.watermeterInfo: About consumption
+Consumptions.show.WaterMeters: Owned consumptions
+
+#------------ edit consumption ----------
+
+Consumptions.edit: Edit page
+Consumptions.edit.title: Edit informations about this consumption

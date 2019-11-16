@@ -1,0 +1,76 @@
+
+{% extends 'layout.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% trans_default_domain 'Consumptions' %}
+
+{% block title %}{{ 'Consumptions.new' | trans }}{% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'Consumptions.new' | trans }}
+            </h1>
+
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i>{{ 'Consumptions.index.homepage' | trans }}</a></li>
+                <li><a href="{{ path('water_meter_index') }}"> {{ 'Consumptions.index.consumptions' | trans }} </a></li>
+                <li class="active">{{ 'Consumptions.new.title' | trans }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <script>
+
+
+    </script>
+    <div class="row row-cards">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-header isolated">
+                    <h3 class="card-title"> {{ 'Consumptions.new.title' | trans }} </h3>
+                </div>
+            </div>
+
+            {{ form_start(form) }}
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body-title">{{ 'Consumptions.form.infos'|trans }}<div class="pull-right"></div></div>
+                    <div class="row">
+
+                        {#{% let consumption = form.currentRecord - lastConsumption.perviousRecord  %}#}
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.date) }}</div>
+                        <div class="col-md-6 col-sm-12"></div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.previousRecord)}}</div>
+                        <div class="col-md-6 col-sm-12" >{{ form_row(form.currentRecord)}}</div>
+                        <div class="col-md-6 col-sm-12" >{{ form_row(form.consumption) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.costPerMeterCube)}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-footer isolated">
+                    <div class="d-flex">
+                        <a href="{{ path('client_index') }}" class="btn btn-link">{{'Consumptions.actions.cancel'|trans}}</a>
+                        <button type="submit" class="btn btn-primary ml-auto"> <i class="fe fe-save"></i> {{'Consumptions.actions.save'|trans}}</button>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+

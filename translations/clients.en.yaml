@@ -1,0 +1,48 @@
+#----------index-----------------
+clients.index.title : Clients page
+clients.index.header: List of our clients
+clients.index.homepage: Home
+clients.index.clients: Clients
+clients.actions.search: Search
+clients.actions.add: Add Client
+clients.actions.export.pdf: Export as Pdf
+clients.actions.export.excel: Export as Excel
+clients.form.cin: C.I.N
+clients.form.fullName: Full Name
+clients.form.firstName: First Name
+clients.form.lastName: Last Name
+clients.form.address: Address
+clients.form.id: Client ID
+clients.form.image: Photo of the client
+clients.form.streetAddress: Street address
+clients.form.houseNumber: House number
+clients.form.city: City
+clients.form.phoneNumber: Phone number
+clients.form.actions: Actions
+clients.form.district: District
+clients.form.zipCode: Code zip
+clients.index.noData: No data found
+clients.actions.delete: Delete
+clients.form.code: Code
+clients.index.confirmDeleteMsg:  Are you sure you want to delete this item?
+clients.show.waterMeters: Owned water meters
+
+#----------new Client-----------------
+
+clients.new: New client
+clients.new.title: Add new client
+clients.form.infos: informaitions about the new client
+clients.actions.cancel: Cancel
+clients.actions.save: Save
+
+
+#---------- show Client ---------------
+clients.show.address: Address information
+clients.show.title: infos about the client
+clients.show.clientInfo: personal information
+
+#------------ edit Client ----------
+
+clients.edit: Edit page
+clients.edit.title: Edit informations about client
+form.label.delete: delete image

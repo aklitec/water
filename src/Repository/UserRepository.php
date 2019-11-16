@@ -25,6 +25,8 @@ class UserRepository extends ServiceEntityRepository
     {
         $qb=$this->createQueryBuilder('s')
                  ->orderBy('s.id', 'DESC');
+        $qb->orWhere('s.deleted= :false')
+            ->setParameter('false', false);
 
         return $this->createPaginator($qb->getQuery(),$page);
     }

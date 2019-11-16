@@ -84,7 +84,14 @@ class UserController extends AbstractController {
 	 */
 	public function edit(Request $request, User $user): Response{
 		$form = $this->createForm(UserType::class, $user);
+		$userRole = 'hello';
+
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $form->remove('roles');
+        }
+
         $form->remove('plainPassword');
+
         $form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 			$this->getDoctrine()->getManager()->flush();
@@ -108,7 +115,7 @@ class UserController extends AbstractController {
 	public function delete(User $user): Response{
 		$UserId = $user->getId();
 		$em = $this->getDoctrine()->getManager();
-		$em->remove($user);
+        $user->setDeleted(true);
 		$em->flush();
         $this->addFlash('success', 'users.flash.delete.success');
 

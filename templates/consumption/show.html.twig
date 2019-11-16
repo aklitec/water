@@ -1,0 +1,149 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'Consumptions' %}
+
+
+{% block title %} {{ 'Consumptions.show.title' | trans }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'Consumptions.show.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('water_meter_index') }}"> {{ 'Consumptions.iedex' | trans }} </a></li>
+                <li class="active">{{ 'Consumptions.show.title' | trans }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row row-cards">
+        <div class="card-header">
+            <h3 class="card-btn">
+                <a href="{{ path('consumption_new',{'id':waterMeter.id})}}"  class="btn btn-pill btn-outline-primary">
+                    <i class="fe fe-plus"></i> {{'Consumptions.actions.add'|trans}}
+                </a>
+            </h3>
+            <div class="card-options">
+                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body-title">{{'Consumptions.form.infos'|trans }}<div class="pull-right"></div></div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">CIN : {{ waterMeter.client.cin }} </div>
+                        <div class="col-md-6 col-sm-12">CODE : {{ waterMeter.code }}</div>
+                        <div class="col-md-6 col-sm-12">Full NAME : {{ waterMeter.client.fullName }}</div>
+                        <div class="col-md-6 col-sm-12">WATER METER ADDRESS : {{ waterMeter.address?waterMeter.address:'NOT AVAILABLE' }}</div>
+                        <div class="col-md-6 col-sm-12">CLIENT ADDRESS: {{ waterMeter.client.address }}</div>
+                        <div class="col-md-6 col-sm-12">STATUS : {{ waterMeter.active ? 'ACTIVE' : 'SUSPENDED' }}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+            <div class="card" style="background-color: #7dc4f6">
+                <div class="card-header  isolated">
+                    <h3 class="card-title col-centered font-weight-bold "> {{ 'Consumptions.form.year.title' | trans }} : {{ year }}  </h3>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-btn">
+                        <a href="#"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
+                            <i class="fe fe-file"></i> {{'Consumptions.actions.export.pdf'|trans}}
+                        </a>
+                        <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
+                            <i class="fe fe-file-text"></i> {{'Consumptions.actions.export.excel'|trans}}
+                        </a>
+                    </h3>
+                    <div class="card-options">
+                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                        <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                            <thead>
+
+                            <tr>
+                                <th>Months</th>
+                                <th >{{ 'Consumptions.form.code' | trans }}</th>
+                                <th>{{ 'Consumptions.form.date' | trans }}</th>
+                                <th>{{ 'Consumptions.form.previousRecord'| trans  }}</th>
+                                <th>{{ 'Consumptions.form.currentRecord'| trans  }}</th>
+                                <th>{{ 'Consumptions.form.consumption'| trans  }}</th>
+                                <th class="col-2">{{ 'Consumptions.form.status'| trans  }}</th>
+                                <th class="text-right"> {{ 'Consumptions.form.actions'| trans  }}</th>
+                            </tr>
+                            </thead>
+                            {{ dump(consumptions.count) }}
+                            <tbody>
+                            {%  for i in range(1,12) %}
+                                {%  for consumption in consumptions %}
+                                    {% if consumption.month == i %}
+                                        <tr><td> {{i}} </td>
+                                            <td> <span class="tag"> {{consumption.code}}</span></td>
+                                            <td>{{ consumption.date | date('Y-m-d') }}</td>
+                                            <td class="text-center">{{ consumption.previousRecord }}</td>
+                                            <td class="text-center">{{ consumption.currentRecord }}</td>
+                                            <td class="text-center">{{ consumption.consumption }}</td>
+                                            {% if  consumption.status == 0 %}
+                                                {%  set status = 'not paid' %}
+                                            {% elseif consumption.status == 1 %}
+                                                {%  set status = 'paid' %}
+                                            {% else %}
+                                                {%  set status = 'alert' %}
+                                            {% endif %}
+                                            <td>{{status}}</td>
+                                            <td class="text-right">
+                                                <a href="{{ path('water_meter_show', {'id': waterMeter.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'show'|trans({},'actions')}}"><i class="fe fe-printer"></i></a>
+                                                {# {%   include('water_meter/_delete_form.html.twig') %}#}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+
+                            {%  for i in range(consumptions.count,12) %}
+                                {%  if consumptions.count < 12 %}
+                                    <tr>
+                                        <td>{{ i }}</td>
+                                        <td>empty</td>
+                                        <td>empty</td>
+                                        <td>empty</td>
+                                        <td>empty</td>
+                                        <td>empty</td>
+                                        <td>empty</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if consumptions.haveToPaginate %}
+            <div class="card-footer pagination">
+                {{
+                pagerfanta(consumptions, 'twitter_bootstrap4_translated', {
+                    routeName: 'consumption_show_paginated',
+                    routeParams: app.request.query.all
+                })
+                }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

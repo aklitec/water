@@ -125,7 +125,7 @@
                                 <td class="text-right">
                                     <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-primary" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
                                     <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'edit'|trans({},'actions')}}"><i class="fe fe-edit"></i></a>
-                                    {{ include('users/delete_form.html.twig') }}
+                                    {% if is_granted('ROLE_ADMIN') %} {{ include('users/delete_form.html.twig') }} {% endif %}
 
                                 </td>
                             </tr>

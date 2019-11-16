@@ -1,0 +1,7 @@
+
+{% trans_default_domain 'WaterMeters' %}
+<form class="form-btn" method="post" action="{{ path('water_meter_delete', {'id': waterMeter.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ waterMeter.id) }}">
+    <button class="btn btn-sm btn-danger">{{ 'WaterMeters.actions.delete'|trans }}</button>
+</form>

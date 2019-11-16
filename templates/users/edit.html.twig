@@ -31,9 +31,11 @@
         <div class="card">
             <div class="card-header isolated">
                 <h3 class="card-title">{{ 'users.edit.title' | trans}}</h3>
-                <div class="card-options">
-                    {{ include('users/delete_form.html.twig', {text: true }) }}
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="card-options">
+                        {{ include('users/delete_form.html.twig', {text: true }) }}
+                    </div>
+                {% endif %}
             </div>
         </div>
 
@@ -53,11 +55,22 @@
             <div class="card-body">
                 <div class="card-body-title">{{ 'users.show.accountInfo'|trans }}</div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        {{ form_row(form.username) }}
-                        {{ form_row(form.email) }}
-                    </div>
-                    <div class="col-md-6 col-sm-12">{{ form_row(form.roles) }}</div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                            <div class="col-md-6 col-sm-12">
+                                {{ form_row(form.username) }}
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                {{ form_row(form.roles) }}
+                            </div>
+                        {% else %}
+                            <div class="col-md-6 col-sm-12">
+                                {{ form_row(form.username) }}
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                {{ form_row(form.email) }}
+                            </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

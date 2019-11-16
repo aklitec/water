@@ -1,0 +1,72 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'WaterMeters' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %} {{ 'WaterMeters.new.title' | trans }} {% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'WaterMeters.new.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('water_meter_index') }}"> {{ 'WaterMeters.index.WaterMeters' | trans }} </a></li>
+                <li class="active">{{ 'WaterMeters.new.title' | trans }}</li>
+            </ol>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header isolated">
+                    <h3 class="card-title">{{ 'WaterMeters.new.title' | trans}}</h3>
+                </div>
+            </div>
+
+            {{ form_start(form) }}
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body-title">{{ 'WaterMeters.show.address'|trans }}<div class="pull-right"></div></div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.streetAddress) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.houseNumber) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.district) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.city) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.zipCode) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body-title">{{ 'WaterMeters.show.WaterMeters'|trans }}<div class="pull-right"></div></div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.setupDate)}}</div>
+                        <div class="col-md-6 col-sm-12" style="margin-top: 8px">{{ form_row(form.active) }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-footer isolated">
+                    <div class="d-flex">
+                        <a href="{{ path('water_meter_index') }}" class="btn btn-link">{{'WaterMeters.actions.cancel'|trans}}</a>
+                        <button type="submit" class="btn btn-primary ml-auto"> <i class="fe fe-save"></i> {{'WaterMeters.actions.save'|trans}}</button>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

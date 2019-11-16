@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -13,7 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Client
 {
-    const NUM_ITEMS = 25;
+    const NUM_ITEMS = 10;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,10 +38,10 @@ class Client
      */
     private $cin;
 
-    /**
+/*    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $address;
+ //   private $address;
 
     /**
      * @ORM\Column(type="float")
@@ -77,6 +79,27 @@ class Client
      * @var \DateTime
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(name="deleted" , type="boolean")
+     * @var boolean
+     */
+    private $deleted = 0;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $address;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\WaterMeter", mappedBy="client", orphanRemoval=true)
+     */
+    private $waterMeters;
+
+    public function __construct()
+    {
+        $this->waterMeters = new ArrayCollection();
+    }
 
 
 
@@ -121,7 +144,7 @@ class Client
         return $this;
     }
 
-    public function getAddress(): ?string
+   /* public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -131,7 +154,7 @@ class Client
         $this->address = $address;
 
         return $this;
-    }
+    }*/
 
     public function getPhoneNumber(): ?float
     {
@@ -206,6 +229,17 @@ class Client
         return $this;
     }
 
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+    public function setDeleted(?bool $deleted): self
+    {
+        $this->deleted = $deleted;
+        return $this;
+    }
+
+
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -227,6 +261,54 @@ class Client
     public function onPrePersist(){
         $fullName = $this->getFirstName().' '.$this->getLastName();
         $this->setFullName($fullName);
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $address->getClient()) {
+            $address->setClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WaterMeter[]
+     */
+    public function getWaterMeters(): Collection
+    {
+        return $this->waterMeters;
+    }
+
+    public function addWaterMeter(WaterMeter $waterMeter): self
+    {
+        if (!$this->waterMeters->contains($waterMeter)) {
+            $this->waterMeters[] = $waterMeter;
+            $waterMeter->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWaterMeter(WaterMeter $waterMeter): self
+    {
+        if ($this->waterMeters->contains($waterMeter)) {
+            $this->waterMeters->removeElement($waterMeter);
+            // set the owning side to null (unless already changed)
+            if ($waterMeter->getClient() === $this) {
+                $waterMeter->setClient(null);
+            }
+        }
+
+        return $this;
     }
 
 

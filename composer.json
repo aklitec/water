@@ -7,6 +7,8 @@
         "ext-iconv": "*",
         "friendsofsymfony/user-bundle": "^2.1",
         "knplabs/knp-time-bundle": "^1.9",
+        "ramsey/uuid": "^3.8",
+        "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/asset": "4.3.*",
         "symfony/console": "4.3.*",
