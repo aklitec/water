@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -49,7 +50,12 @@ class WaterMeter
     private $active = 1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="waterMeters")
+     * @ORM\Column(type="string", length=10)
+     */
+    private $wmNumber;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="waterMeters",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
@@ -63,6 +69,15 @@ class WaterMeter
      * @ORM\OneToMany(targetEntity="App\Entity\Consumption", mappedBy="waterMeter")
      */
     private $consumptions;
+
+    /**
+     * @ORM\Column(name="deleted" , type="boolean")
+     * @var boolean
+     */
+    private $deleted = 0;
+
+
+
 
     public function getId(): ?int
     {
@@ -177,6 +192,19 @@ class WaterMeter
         return $this;
     }
 
+
+    public function getWmNumber(): ?string
+    {
+        return $this->wmNumber;
+    }
+
+    public function setWmNumber(string $wmNumber): self
+    {
+        $this->wmNumber = $wmNumber;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Consumption[]
      */
@@ -207,4 +235,15 @@ class WaterMeter
 
         return $this;
     }
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+    public function setDeleted(?bool $deleted): self
+    {
+        $this->deleted = $deleted;
+        return $this;
+    }
+
 }

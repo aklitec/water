@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 
 /**
@@ -17,7 +18,7 @@ use Doctrine\ORM\Query;
  */
 class ClientRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Client::class);
     }
@@ -40,31 +41,46 @@ class ClientRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-
-    public function  findAllClients(){
-        return $this
+    public function  findAllClient()
+    {
+        $qb =$this
             ->createQueryBuilder('s')
-            ->orderBy('s.id', 'DESC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+            ->orderBy('s', 'DESC')
+            ->setMaxResults(25);
+        return  $qb->getQuery();
+    }
+
+
+    public function  searchByQuery($query,$max){
+        $qb = $this
+            ->createQueryBuilder('s');
+
+                $qb->select('s')
+                    ->andwhere('s.fullName LIKE :query')
+                    ->andWhere('e.deleted= :false')
+                    ->setParameter('query', '%'.$query.'%')
+                    ->setParameter('false', false)
+                    ->setMaxResults($max);
+
+            return $qb->getQuery();
     }
 
     public function  findMatchedClients($query , int $page=1){
         $qb = $this
-            ->createQueryBuilder('c')
-            ->orderBy('c.id', 'DESC');
+            ->createQueryBuilder('c');
+
         if (!empty($x = trim($query['cin']))) {
-            $qb->orWhere('c.cin = :cin')
-                ->setParameter('cin', $x );
+            $qb ->andWhere('c.cin = :cin')->setParameter('cin', $x );
         }
         if (!empty($x = trim($query['fullName']))) {
-            $qb->orWhere('c.fullName LIKE :fullName')
-                ->setParameter('fullName', '%' . $x . '%');
+            $qb->andWhere('c.fullName LIKE :fullName')->setParameter('fullName', '%' . $x . '%');
         }
-        if (!empty($x = trim($query['phoneNumber']))) {
-            $qb->orWhere('c.phoneNumber = :phoneNumber')->setParameter('phoneNumber', $x );
+        if (!empty($x = trim($query['phoneNumber']))){
+            $qb->andWhere('c.phoneNumber = :phoneNumber')->setParameter('phoneNumber', $x );
         }
+            $qb->andWhere('c.deleted= :false')
+                ->orderBy('c.id', 'DESC')
+                ->setParameter('false', false);
         return $this->createPaginator($qb->getQuery(),$page);
     }
 

@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use DoctrineExtensions\Query\Mysql\Year;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -26,14 +27,24 @@ class ConsumptionRepository extends ServiceEntityRepository
     }
 
 
-    public function findLatestConsumption($arg)
+    public function findLatestConsumption($arg,int $page=1)
     {
+        $p = $this->createQueryBuilder('e')
+            ->select('e.date as y')
+            ->orderBy('e.date', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery();
+        ;
+        $date= date('Y',strtotime($p->getFirstResult())) +($page-1);
+
         $cr = $this->createQueryBuilder('e')
                     ->leftJoin('e.waterMeter', 'waterMeter')
                     ->andWhere('waterMeter.id = :arg')
-                    ->orderBy('e.date', 'DESC')
+                    ->andWhere('YEAR(e.date) LIKE :date')
+                    ->orderBy('e.date', 'ASC')
                     ->setMaxResults(1)
                     ->setParameter('arg',$arg)
+                    ->setParameter('date', (string)$date)
                     ->getQuery();
         try {
             return $cr->getOneOrNullResult();
@@ -45,15 +56,15 @@ class ConsumptionRepository extends ServiceEntityRepository
 
     public function  findConsumptionByEachYear($arg,int $page=1):Pagerfanta
     {
+
+
         $qb =$this
             ->createQueryBuilder('s')
-           // ->where('s.date LIKE :date')
             ->leftJoin('s.waterMeter', 'waterMeter')
             ->andWhere('waterMeter.id = :arg')
-            ->orderBy('s.date', 'ASC')
+            ->orderBy('s.date', 'DESC')
             ->setMaxResults(12)
             ->setParameter('arg',$arg);
-           // ->setParameter('date',$date = '%'.date($year).'%');
         return $this->createPaginator($qb->getQuery(),$page);
     }
 

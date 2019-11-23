@@ -19,12 +19,8 @@ class Address
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $streetAddress;
+    private $streetAddress; // Address, suite, zipcode, city (EX: 101 bloc 5   , 60250, Aklim Berkane, Maroc)
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $houseNumber;
 
     /**
      * @ORM\Column(type="string", length=25)
@@ -32,23 +28,26 @@ class Address
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $district;
+    private $suit;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $zipCode;
 
+
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="address", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\WaterMeter", inversedBy="address", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $waterMeter;
 
@@ -69,17 +68,6 @@ class Address
         return $this;
     }
 
-    public function getHouseNumber(): ?int
-    {
-        return $this->houseNumber;
-    }
-
-    public function setHouseNumber(?int $houseNumber): self
-    {
-        $this->houseNumber = $houseNumber;
-
-        return $this;
-    }
 
     public function getCity(): ?string
     {
@@ -93,14 +81,14 @@ class Address
         return $this;
     }
 
-    public function getDistrict(): ?string
+    public function getSuit(): ?string
     {
-        return $this->district;
+        return $this->suit;
     }
 
-    public function setDistrict(string $district): self
+    public function setSuit(string $suit): self
     {
-        $this->district = $district;
+        $this->suit = $suit;
 
         return $this;
     }
@@ -129,10 +117,12 @@ class Address
         return $this;
     }
 
+
+
     public function __toString(): string
     {
-        $houseNum = !empty($this->houseNumber)?'nr '. $this->houseNumber:'';
-        return $this->streetAddress . ' '. $houseNum .' '.$this->city.' '.$this->district.' '.$this->zipCode;
+        $suit= $this->suit ? ' '.$this->suit:'';
+        return $this->streetAddress .$suit.' '.$this->city.' '.$this->zipCode;
     }
 
     public function getWaterMeter(): ?WaterMeter

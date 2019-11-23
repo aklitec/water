@@ -89,11 +89,11 @@
                         <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
                             <thead>
                             <tr>
-                                <th class="col-2">{{ 'clients.form.cin' | trans }}</th>
+                                <th>Avatar</th>
+                                <th>{{ 'clients.form.cin' | trans }}</th>
                                 <th>{{ 'clients.form.fullName' | trans }}</th>
-                                <th>{{ 'clients.form.phoneNumber'| trans  }}</th>
                                 <th>{{ 'clients.form.address'| trans  }}</th>
-                                <th class="text-right"> {{ 'clients.form.actions'| trans  }}</th>
+                                <th class="text-center col-md-3"> {{ 'clients.form.actions'| trans  }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -107,15 +107,14 @@
                                         {% endif %}
                                         <div class="avatar d-block" style="background-image: url({{ image }})">
                                             <span class="avatar-status bg-green"></span>
-                                            <span class="tag">{{ client.cin | lower }}</span>
                                         </div>
                                     </td>
+                                    <td>{{ client.cin | lower }}</td>
                                     <td>{{ client.fullName | capitalize }}</td>
-                                    <td>{{ client.phoneNumber }}</a></td>
                                     <td>{{ client.address }}</a></td>
                                     <td class="text-right">
-                                        <a href="{{ path('client_show',{'id': client.id}) }}" class="btn btn-sm btn-outline-primary" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
-                                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'edit'|trans({},'actions')}}"><i class="fe fe-edit"></i></a>
+                                        <a href="{{ path('client_show',{'id': client.id}) }}" class="btn btn-sm btn-outline-primary" ><i class="fe fe-eye mr-2"></i>{{'show'|trans({},'actions')}}</a>
+                                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning"  ><i class="fe fe-edit mr-2"></i>{{'edit'|trans({},'actions')}}</a>
                                         {{ include('client/_delete_form.html.twig') }}
                                     </td>
                                 </tr>

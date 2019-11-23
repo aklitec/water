@@ -2,6 +2,12 @@
 .form-btn{
     display: inline;
 }
+.select2-container {
+    width: 100% !important;
+}
+.select2-container .select2-selection--single{
+    height: 2.4rem !important;
+}
 .card-footer.pagination {
     display: flex;
     align-items: center;

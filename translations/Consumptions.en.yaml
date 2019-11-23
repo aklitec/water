@@ -17,12 +17,12 @@ Consumptions.form.consumption: Consumption
 Consumptions.form.status: Status
 Consumptions.form.cost: Cost
 Consumptions.form.year.title: Consumtpion list of
-Consumptions.form.infos: informaitions about the new consumption
+Consumptions.form.infos: Informaitions
 Consumptions.isDeleted.true: Active
 Consumptions.isDeleted.false: Suspended
 Consumptions.form.actions: Actions
 Consumptions.index.noData: No data found
-
+Consumptions.form.wnNumber: Water Meter Number
 Consumptions.actions.delete: Delete
 
 Consumptions.index.confirmDeleteMsg:  Are you sure you want to delete this item?
@@ -39,7 +39,7 @@ Consumptions.actions.save: Save
 #---------- show Consumption ---------------
 
 Consumptions.show.address: Address information
-Consumptions.show.title: infos about the consumption
+Consumptions.show.title: Consumption list
 Consumptions.show.watermeterInfo: About consumption
 Consumptions.show.WaterMeters: Owned consumptions
 

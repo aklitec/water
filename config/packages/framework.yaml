@@ -5,6 +5,8 @@ framework:
         fallbacks: ['en']
     #csrf_protection: true
     #http_method_override: true
+    serializer:
+        enabled: true
 
     templating:
         engines: ['twig', 'php']

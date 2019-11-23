@@ -37,7 +37,7 @@
                     </ul>
                     <div class="card-options">
                         <a href="{{ path('fos_user_change_password') }}" class="btn btn-sm btn-bitbucket mr-2"><i class="fe fe-lock"></i> {{'users.actions.change_password'|trans}}</a>
-                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-warning mr-2"><i class="fe fe-edit"></i> {{'edit'|trans({},'actions')}}</a>
+                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-warning mr-2"><i class="fe fe-edit mr-2"></i> {{'edit'|trans({},'actions')}}</a>
                         {#                        {{ include('student/$delete_form.html.twig') }}#}
                     </div>
                 </div>

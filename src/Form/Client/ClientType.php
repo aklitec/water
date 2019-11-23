@@ -32,7 +32,7 @@ class ClientType extends AbstractType
             ->add('lastName', TextType::Class, ['label'=>'clients.form.lastName'])
             ->add('phoneNumber', NumberType::Class, ['label'=>'clients.form.phoneNumber'])
            // ->add('address', TextType::Class, ['label'=>'clients.form.address'])
-             ->add('address', AddressType::class);
+             ->add('address', AddressType::class );
 
     }
 

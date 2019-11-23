@@ -24,18 +24,20 @@ class WaterMeterRepository extends ServiceEntityRepository
         parent::__construct($registry, WaterMeter::class);
     }
 
-    public function  findAllWaterMetersByClient($args,int $page=1):Pagerfanta
+    public function  findAllWaterMetersByClient($args): array
     {
         $qb =$this
             ->createQueryBuilder('wm')
-            ->select('wm')
+            //->select('wm')
             ->leftJoin('wm.client','client')
             ->andWhere('client.id= :args')
+            ->andWhere('wm.deleted=:false')
             ->setParameter('args', $args)
+            ->setParameter('false', false)
             ->orderBy('wm.id', 'DESC')
             ->setMaxResults(10);
 
-        return $this->createPaginator($qb->getQuery(),$page);
+        return $qb->getQuery()->getResult();
     }
 
 
@@ -45,6 +47,8 @@ class WaterMeterRepository extends ServiceEntityRepository
         $qb =$this
             ->createQueryBuilder('s')
             ->orderBy('s.id', 'DESC')
+            ->where('s.deleted= :false')
+            ->setParameter('false', false)
             ->setMaxResults(25);
         return  $this->createPaginator($qb->getQuery(),$page);
     }
@@ -75,23 +79,25 @@ class WaterMeterRepository extends ServiceEntityRepository
 
         if (!empty($x = trim($query['cin']))) {
             $qb->andwhere('client.cin = :cin')
-                ->setParameter('cin', $x  );
+                ->setParameter('cin', $x);
         }
 
-        if (!empty($x = trim($query['code']))) {
-            $qb->andWhere('wm.code = :code')
-                ->setParameter('code', $x  );
-        }
         if (!empty($x = trim($query['phoneNumber']))) {
-            $qb->andWhere('client.phoneNumber = :phoneNumber')
-                ->setParameter('phoneNumber', $x  );
+            $qb->andWhere('wm.phoneNumber= :phoneNumber')
+                ->setParameter('phoneNumber', $x);
+        }
+        if (!empty($x = trim($query['wmNumber']))) {
+            $qb->andWhere('client.phoneNumber=:phoneNumber')
+                ->setParameter('phoneNumber', $x );
         }
         if (!empty($x = trim($query['fullName']))) {
             $qb ->andWhere('client.fullName LIKE :fullName')
-                ->setParameter('fullName', '%'.$x.'%'  );
+                ->setParameter('fullName', '%'.$x.'%' );
         }
+            $qb ->andWhere('wm.deleted= :false')
+                ->setParameter('false',false)
+                ->orderBy('wm.id', 'DESC');
 
-                $qb->orderBy('wm.id', 'DESC');
         return $this->createPaginator($qb->getQuery(),$page);
     }
 

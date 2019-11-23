@@ -32,9 +32,8 @@ class ConsumptionController extends AbstractController
     public function index(WaterMeter $waterMeter,Request $request,ConsumptionRepository $consumptionRepository , int $page): Response
 
     {
-
         $consumptions = $consumptionRepository->findConsumptionByEachYear($waterMeter->getId(),$page);
-        $year = $consumptionRepository->findLatestConsumption($waterMeter->getId());
+        $year = $consumptionRepository->findLatestConsumption($waterMeter->getId(),$page);
 
         return $this->render('consumption/index.html.twig', [
             'consumptions' => $consumptions,
@@ -90,13 +89,20 @@ class ConsumptionController extends AbstractController
     /**
      * @Route("/{id}", name="consumption_show", methods={"GET"})
      * @param Consumption $consumption
+     * @param ConsumptionRepository $consumptionRepository
+     * @param WaterMeter $waterMeter
+     * @param $page
      * @return Response
      */
-    public function show(Consumption $consumption): Response
+    public function show(Consumption $consumption, ConsumptionRepository $consumptionRepository, WaterMeter $waterMeter, $page): Response
 
     {
+        $consumptions = $consumptionRepository->findConsumptionByEachYear($waterMeter->getId(),$page);
+        $year = $consumptionRepository->findLatestConsumption($waterMeter->getId(),$page);
         return $this->render('consumption/show.html.twig', [
-            'consumption' => $consumption,
+            'waterMeter' => $waterMeter,
+            'year' =>$year,
+            'consumptions'=>$consumptions
         ]);
     }
 
