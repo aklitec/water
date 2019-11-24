@@ -4,6 +4,6 @@
 <form class="form-btn"  method="post" action="{{ path('client_delete', {'id': client.id}) }}" onsubmit="return confirm('{{'clients.index.confirmDeleteMsg' | trans}}');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
-    <button class="btn btn-sm btn-danger">{{'clients.actions.delete'|trans}}</button>
+    <button class="btn btn-sm btn-danger " ><i class="fe fe-trash-2 mr-2"></i>{{'clients.actions.delete'|trans}}</button>
 </form>
 

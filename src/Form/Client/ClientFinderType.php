@@ -34,10 +34,10 @@ class ClientFinderType extends AbstractType
                     'placeholder' => 'clients.form.phoneNumber',
                 ],
             ])
-            ->add('code', TextType::class, [
+            ->add('wmNumber', TextType::class, [
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'clients.form.code',
+                    'placeholder' => 'clients.form.Number',
                 ],
                 'mapped' => false
             ])

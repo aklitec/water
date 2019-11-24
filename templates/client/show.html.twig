@@ -27,16 +27,17 @@
                 <div class="card-header isolated">
                     <ul class="nav nav-tabs card-header-tabs">
 
+
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#waterMeter">{{'clients.show.waterMeters'|trans}}</a>
+                            <a class="nav-link active" data-toggle="tab" href="#student">{{'clients.show.clientInfo'|trans}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#student">{{'clients.show.clientInfo'|trans}}</a>
+                            <a class="nav-link " data-toggle="tab" href="#waterMeter">{{'clients.show.waterMeters'|trans}}</a>
                         </li>
                     </ul>
                     <div class="card-options">
-                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-warning "> {{'edit'|trans({},'actions')}}</a>
-                        <a href="{{ path('client_index') }}" class="btn btn-sm btn-link">{{'back'|trans({},'actions')}}</a>
+                        <a href="{{ path('client_index') }}" class="btn btn-sm btn-link mr-2"><i class="fa fa-mail-reply mr-2"></i>{{'back'|trans({},'actions')}}</a>
+                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-sm btn-warning mr-2"><i class="fe fe-edit"></i> {{'edit'|trans({},'actions')}}</a>
                         {{ include('client/_delete_form.html.twig') }}
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                 <!-- Card Body -->
                 <div class="card-body card-tab">
                     <div class="tab-content">
-                        <div class="tab-pane container fade" id="student">
+                        <div class="tab-pane container active" id="student">
                             <div class="table-responsive">
                                 <div class="pic-info">
                                     {% if client.image is not empty %}

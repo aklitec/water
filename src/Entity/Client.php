@@ -92,7 +92,8 @@ class Client
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WaterMeter", mappedBy="client", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\WaterMeter", mappedBy="client", orphanRemoval=true, cascade={"persist", "remove"})
+     *
      */
     private $waterMeters;
 
@@ -291,10 +292,9 @@ class Client
     public function addWaterMeter(WaterMeter $waterMeter): self
     {
         if (!$this->waterMeters->contains($waterMeter)) {
-            $this->waterMeters[] = $waterMeter;
+            $this->waterMeters[]=$waterMeter;
             $waterMeter->setClient($this);
         }
-
         return $this;
     }
 

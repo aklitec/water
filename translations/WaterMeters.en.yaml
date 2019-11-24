@@ -13,6 +13,10 @@ WaterMeters.form.setupDate: Installation date
 WaterMeters.form.cin: CIN
 WaterMeters.form.code: Code
 WaterMeters.form.active: Status
+WaterMeters.wmNumber: WM Number
+
+WaterMeters.owner: Owner
+WaterMeters.form.lastRecord: Last Record
 WaterMeters.form.actions: Actions
 WaterMeters.index.noData: No data found
 WaterMeters.actions.delete: Delete
@@ -26,16 +30,16 @@ WaterMeters.new.title: Add new water meter
 WaterMeters.actions.cancel: Cancel
 WaterMeters.actions.save: Save
 WaterMeters.index.setupDate: Installation date
-WaterMeters.index.active: Active this Water Meter
+WaterMeters.index.active: Activate Water Meter
 
 #---------- show WaterMeter ---------------
 
-WaterMeters.show.address: Address information
-WaterMeters.show.title: infos about the water meter
+WaterMeters.show.address: Address
+WaterMeters.show.title: Water meter details
 WaterMeters.show.clientInfo: About water meter
 WaterMeters.show.WaterMeters: Owned water meters
 
 #------------ edit WaterMeter ----------
 
 WaterMeters.edit: Edit page
-WaterMeters.edit.title: Edit informations about this water meter
+WaterMeters.edit.title: Edit this water meter

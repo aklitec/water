@@ -4,6 +4,8 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
+
+
 {% block title %} {{ 'WaterMeters.new.title' | trans }} {% endblock %}
 
 {% block pageHeader %}
@@ -22,7 +24,9 @@
     </div>
 {% endblock %}
 
+
 {% block content %}
+
     <div class="row row-cards">
         <div class="col-12">
             <div class="card">
@@ -37,10 +41,19 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body-title">{{ 'WaterMeters.show.address'|trans }}<div class="pull-right"></div></div>
+                    {% if client is not defined %}
                     <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="selectClient">Client</label><select id="selectClient" required class="js-example-basic-multiple js-states form-control select2-hidden-accessible" style="width: 50%" name="selectClient" >
+                            </select>
+                            <div class="col-md-6 col-sm-12" style="padding: 0.375rem 0.75rem;">{{ form_row(form.client,{'id':'clientId'}) }}</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.wmNumber) }}</div>
                         <div class="col-md-6 col-sm-12">{{ form_row(form.address.streetAddress) }}</div>
-                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.houseNumber) }}</div>
-                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.district) }}</div>
+                        <div class="col-md-6 col-sm-12">{{ form_row(form.address.suit) }}</div>
                         <div class="col-md-6 col-sm-12">{{ form_row(form.address.city) }}</div>
                         <div class="col-md-6 col-sm-12">{{ form_row(form.address.zipCode) }}</div>
                     </div>
@@ -51,7 +64,9 @@
                     <div class="card-body-title">{{ 'WaterMeters.show.WaterMeters'|trans }}<div class="pull-right"></div></div>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">{{ form_row(form.setupDate)}}</div>
+                       {% if form.active is defined %}
                         <div class="col-md-6 col-sm-12" style="margin-top: 8px">{{ form_row(form.active) }}</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -70,3 +85,60 @@
         </div>
     </div>
 {% endblock %}
+{%  block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{asset('tabler/css/jquery.datetimepicker.min.css')}}"/>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    <script src="{{ asset('tabler/js/vendors/jquery.datetimepicker.full.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#selectClient").on("select2:select", function (e) {
+                $("#clientId").val(e.params.data.id)
+            });
+
+            $("#selectClient").select2({
+                ajax: {
+                    dataType: 'json',
+                    url:"/water/meter/new/client",
+                    delay: 150,
+                    data: function (params) {
+                        return  {
+                            searchTerm: params.term
+                        }
+                    },
+                    processResults: function(response){
+                        console.log('Res:',response)
+                        return {
+                            results: $.map(response, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.text,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+            });
+
+
+            $('.datetimepicker').datetimepicker({
+                  timepicker:false,
+                  format : 'd-m-Y'
+              });
+         })
+    </script>
+
+{% endblock %}
+
+
+
+
+

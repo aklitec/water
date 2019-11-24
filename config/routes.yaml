@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+client_search:
+    path:     /water/meter/new/client
+    controller: App\Controller\WaterMeterController::searchClient

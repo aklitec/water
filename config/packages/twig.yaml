@@ -8,3 +8,5 @@ twig:
         app_name: '%env(APP_NAME)%'
         app_version: 0.0.1
         pathToWeb: "%kernel.project_dir%"
+    form_themes:
+        - '@TetranzSelect2Entity/Form/fields.html.twig'

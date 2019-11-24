@@ -15,7 +15,14 @@ class ConsumptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateType::class)
+            ->add('date', DateType::class,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datetimepicker',
+                    'placeholder' => 'dd/mm/yyyy',
+                ]
+            ])
             ->add('previousRecord', NumberType::class,['disabled'=>true])
             ->add('currentRecord')
             ->add('consumption',NumberType::class,[

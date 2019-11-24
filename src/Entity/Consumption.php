@@ -64,10 +64,6 @@ class Consumption
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDeleted=0;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\WaterMeter", inversedBy="consumptions")
@@ -83,6 +79,12 @@ class Consumption
      * @ORM\Column(type="smallint")
      */
     private $month;
+
+    /**
+     * @ORM\Column(name="deleted" , type="boolean")
+     * @var boolean
+     */
+    private $deleted = 0;
 
     public function getId(): ?int
     {
@@ -199,17 +201,6 @@ class Consumption
         return $this;
     }
 
-    public function getIsDeleted(): ?bool
-    {
-        return $this->isDeleted;
-    }
-
-    public function setIsDeleted(bool $isDeleted): self
-    {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
-    }
 
     public function getWaterMeter(): ?WaterMeter
     {
@@ -262,4 +253,17 @@ class Consumption
 
         return $this;
     }
+
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+    public function setDeleted(?bool $deleted): self
+    {
+        $this->deleted = $deleted;
+        return $this;
+    }
+
+
 }

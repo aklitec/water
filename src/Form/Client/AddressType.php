@@ -19,10 +19,10 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('streetAddress', TextType::Class, ['label' => 'clients.form.streetAddress'])
-            ->add('houseNumber', NumberType::Class, ['label' => 'clients.form.houseNumber'])
             ->add('city', TextType::Class, ['label' => 'clients.form.city'])
-            ->add('district', TextType::Class, ['label' => 'clients.form.district'])
-            ->add('zipCode', NumberType::Class, ['label' => 'clients.form.zipCode']);
+            ->add('suit', TextType::Class, ['label' => 'clients.form.suit','required'=>false])
+            ->add('zipCode', NumberType::Class, ['label' => 'clients.form.zipCode','by_reference' => false]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -33,3 +33,5 @@ class AddressType extends AbstractType
         ]);
     }
 }
+
+

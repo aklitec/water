@@ -90,7 +90,7 @@
                     <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
                         <thead>
                         <tr>
-                            <th class="col-2">{{ 'users.form.user' | trans }}</th>
+                            <th>{{ 'users.form.user' | trans }}</th>
                             <th>{{ 'users.form.fullName' | trans }}</th>
                             <th>{{ 'users.form.email'| trans  }}</th>
                             <th>{{ 'users.form.status'| trans  }}</th>
@@ -110,10 +110,9 @@
                                     {% endif %}
                                     <div class="avatar d-block" style="background-image: url({{ avatar }})">
                                         <span class="avatar-status bg-green"></span>
-                                        <span class="tag">{{ user.username | lower }}</span>
                                     </div>
                                 </td>
-                                <td>{{ user.fullName | capitalize }}</td>
+                                <td>{{ user.username | lower }}</td>
                                 <td>{{ user.email }}</a></td>
                                 <td><span class="tag tag-azure">{{ user.enabled == true ? 'enabled'| trans  : 'disabled' | trans }}</span></td>
                                 <td>
@@ -126,7 +125,6 @@
                                     <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-primary" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
                                     <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'edit'|trans({},'actions')}}"><i class="fe fe-edit"></i></a>
                                     {% if is_granted('ROLE_ADMIN') %} {{ include('users/delete_form.html.twig') }} {% endif %}
-
                                 </td>
                             </tr>
                         {% else %}
