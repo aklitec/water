@@ -10,7 +10,7 @@
                                 <span class="mr-1">{{'WaterMeters.owner'|trans}} :</span><span style="font-weight: bold"> {{client.fullName|capitalize}}</span>
                         </div>
                         <div class="card-options">
-                            <a href="{{ path('water_meter_show', {'id': waterMeter.id}) }}" class="btn btn-sm btn-outline-warning mr-2" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
+                            <a href="{{ path('consumption_index', {'id': waterMeter.id}) }}" class="btn btn-sm btn-outline-warning mr-2" title="{{'show'|trans({},'actions')}}"><i class="fe fe-eye"></i></a>
                             {%   include('water_meter/_delete_form.html.twig') %}
                         </div>
                     </div>
@@ -37,7 +37,7 @@
 
         <div class="col-md-6">
         <div class="card">
-            <a href="{{ path('water_meter_new',{'id':client.id})}}"  class="btn  btn-outline-primary d-flex" style="height: 100%">
+            <a href="{{ path('new_water_meter_to_current_client',{'id':client.id})}}"  class="btn  btn-outline-primary d-flex" style="height: 100%">
             <div style="margin: 0 auto">
                     <i class="fe fe-plus" style="font-size: 5rem"></i><div style="margin-top: 30px"> <span>{{'WaterMeters.actions.add'|trans}}</span></div>
             </div>

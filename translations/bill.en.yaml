@@ -1,0 +1,10 @@
+bill.form.fullName: Full Name
+bill.form.cin: C.I.N
+bill.form.code: Code
+bill.form.status: Status
+bill.form.month: Month
+bill.form.year: Year
+bill.actions.get: Search
+bill.index.title: bills list
+bill.index: bills index
+bill.show.title: selected bill

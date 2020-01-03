@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "username": "momo",
+    "username_canonical": "momo",
+    "email": "momo@momo.com",
+    "email_canonical": "momo@momo.com",
+    "enabled": 1,
+    "salt": null,
+    "password": "$2y$13$amDWDh9Jtc.pubu2sdJl7O6jC7Y4MkxS7CZYE8BJL.aW7R8nwp2de",
+    "last_login": "2019-12-28 12:35:36",
+    "confirmation_token": null,
+    "password_requested_at": null,
+    "roles": "a:0:{}",
+    "full_name": null,
+    "avatar": null,
+    "updatedAt": "2019-12-28 12:35:36",
+    "createdAt": "2019-11-23 01:46:15",
+    "deleted": 0
+  }
+]

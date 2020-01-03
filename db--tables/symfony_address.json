@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "client_id": 1,
+    "water_meter_id": null,
+    "street_address": "lot salam",
+    "city": "aklim",
+    "suit": null,
+    "zip_code": 63250
+  },
+  {
+    "id": 2,
+    "client_id": null,
+    "water_meter_id": 1,
+    "street_address": "lot salam nr 123",
+    "city": "aklim",
+    "suit": "residance nahda",
+    "zip_code": 63250
+  },
+  {
+    "id": 3,
+    "client_id": null,
+    "water_meter_id": 2,
+    "street_address": "lot salam nr 123",
+    "city": "aklim",
+    "suit": "residance nahda",
+    "zip_code": 63250
+  },
+  {
+    "id": 4,
+    "client_id": null,
+    "water_meter_id": 3,
+    "street_address": "lot salam nr 123",
+    "city": "aklim",
+    "suit": "residance noujoum",
+    "zip_code": 63250
+  },
+  {
+    "id": 5,
+    "client_id": null,
+    "water_meter_id": 4,
+    "street_address": "lot laymon",
+    "city": "berkane",
+    "suit": null,
+    "zip_code": 12345
+  },
+  {
+    "id": 6,
+    "client_id": null,
+    "water_meter_id": 5,
+    "street_address": "lot zaytoon",
+    "city": "oujda",
+    "suit": null,
+    "zip_code": 22222
+  }
+]

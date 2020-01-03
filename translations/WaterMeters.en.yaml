@@ -6,7 +6,7 @@ WaterMeters.index.homepage: Home
 WaterMeters.index.WaterMeters: Water Meters
 WaterMeters.actions.search: Search
 WaterMeters.actions.add: Add a Water Meter
-WaterMeters.actions.export.pdf: Export as Pdf
+WaterMeters.actions.export.pdf: Release Bills
 WaterMeters.actions.export.excel: Export as Excel
 WaterMeters.form.createdAt: Created At
 WaterMeters.form.setupDate: Installation date

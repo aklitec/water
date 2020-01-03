@@ -28,9 +28,9 @@ class WaterMeterRepository extends ServiceEntityRepository
     {
         $qb =$this
             ->createQueryBuilder('wm')
-            //->select('wm')
+            ->select('wm')
             ->leftJoin('wm.client','client')
-            ->andWhere('client.id= :args')
+            ->andWhere('client.id=:args')
             ->andWhere('wm.deleted=:false')
             ->setParameter('args', $args)
             ->setParameter('false', false)
@@ -47,11 +47,14 @@ class WaterMeterRepository extends ServiceEntityRepository
         $qb =$this
             ->createQueryBuilder('s')
             ->orderBy('s.id', 'DESC')
-            ->where('s.deleted= :false')
-            ->setParameter('false', false)
+            ->where('s.deleted=0')
+
             ->setMaxResults(25);
         return  $this->createPaginator($qb->getQuery(),$page);
     }
+
+
+
 
     public function findLatestWaterMeters(int $page=1):Pagerfanta
     {
@@ -82,11 +85,11 @@ class WaterMeterRepository extends ServiceEntityRepository
                 ->setParameter('cin', $x);
         }
 
-        if (!empty($x = trim($query['phoneNumber']))) {
-            $qb->andWhere('wm.phoneNumber= :phoneNumber')
-                ->setParameter('phoneNumber', $x);
-        }
         if (!empty($x = trim($query['wmNumber']))) {
+            $qb->andWhere('wm.wmNumber= :wmNumber')
+                ->setParameter('wmNumber', $x);
+        }
+        if (!empty($x = trim($query['phoneNumber']))) {
             $qb->andWhere('client.phoneNumber=:phoneNumber')
                 ->setParameter('phoneNumber', $x );
         }
@@ -99,6 +102,24 @@ class WaterMeterRepository extends ServiceEntityRepository
                 ->orderBy('wm.id', 'DESC');
 
         return $this->createPaginator($qb->getQuery(),$page);
+    }
+
+
+    public function select() {
+        $query = $this->createQueryBuilder('wm')
+            ->leftJoin('wm.address','address')
+            ->select('wm')
+            ->groupBy('address.city');
+        return $query;
+    }
+
+    public function findWmByClient($arg) {
+        $query = $this->createQueryBuilder('wm')
+            ->leftJoin('wm.client','client')
+            ->select('wm')
+            ->andWhere('client.id = :clientId')
+            ->setParameter('clientId',$arg);
+        return $query->getQuery()->getResult();
     }
 
     // /**

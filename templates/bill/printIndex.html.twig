@@ -1,0 +1,76 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'dashboard' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}{{'bill'|trans }} | {{ parent() }}{% endblock %}
+
+{#
+{% block pageHeader %}
+    {{include('bill/bill_header/bill_header.html.twig')}}
+{% endblock %}
+#}
+{% block pageHeader %}
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>This page is meant to export the consumption of all clients of a specific month and year in order to release a bill for each one of them.</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row-cards">
+        <div class="col-12">
+            <div class="searchBox">
+                <form action="" class="searchBox-body">
+                    <div class="row" style="margin-bottom:-15px">
+                        {{ form_start(form, {'method': 'GET'}) }}
+
+                        {% set params = app.request.query.all %}
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-calendar"></i></span>
+                                    {{ form_widget(form.year, {value: params.release_bill.year | default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-calendar"></i></span>
+                                    {{ form_widget(form.month, {value: params.release_bill.month | default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md col-sm-6">
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon"><i class="fe fe-map-pin"></i></span>
+                                    {{ form_widget(form.city, {value: params.release_bill.city | default('') }) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 text-right">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-block btn-outline-dark"><i class="fe fe-printer"></i> {{'bill.actions.'|trans}}</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

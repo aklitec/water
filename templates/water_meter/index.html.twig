@@ -81,15 +81,15 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-btn">
-                    <a href="{{ path('water_meter_add') }}"  class="btn btn-pill btn-outline-primary">
+                    <a href="{{ path('new_water_meter') }}"  class="btn btn-pill btn-outline-primary">
                         <i class="fe fe-plus"></i> {{'WaterMeters.actions.add'|trans}}
                     </a>
-                    <a href="#"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
-                        <i class="fe fe-file"></i> {{'WaterMeters.actions.export.pdf'|trans}}
+                    <a href="{{ path('print_bills') }}"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
+                        <i class="fe fe-printer"></i> {{'WaterMeters.actions.export.pdf'|trans}}
                     </a>
-                    <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
+                   {# <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
                         <i class="fe fe-file-text"></i> {{'WaterMeters.actions.export.excel'|trans}}
-                    </a>
+                    </a>#}
                 </h3>
                 <div class="card-options">
                     <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>

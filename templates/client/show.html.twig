@@ -48,15 +48,15 @@
                 <div class="card-body card-tab">
                     <div class="tab-content">
                         <div class="tab-pane container active" id="student">
-                            <div class="table-responsive">
-                                <div class="pic-info">
-                                    {% if client.image is not empty %}
-                                        <img src="{{ vich_uploader_asset(client, 'imageFile') }}" alt="{{ client.firstName ~' '~ client.lastName }}" />
-                                    {% else %}
-                                        <img alt="" src="/app/img/user.png">
-                                    {% endif %}
-                                </div>
-                                <table class="table card-table table-striped table-vcenter show-table">
+                                <div class="table-responsive">
+                                    <div class="pic-info">
+                                        {% if client.image is not empty %}
+                                            <img src="{{ vich_uploader_asset(client, 'imageFile') }}" alt="{{ client.firstName ~' '~ client.lastName }}" />
+                                        {% else %}
+                                            <img alt="" src="/app/img/user.png">
+                                        {% endif %}
+                                    </div>
+                                    <table class="table card-table table-striped table-vcenter show-table">
                                     <tbody>
                                     <tr>
                                         <th>{{ 'clients.form.id'|trans }}</th>

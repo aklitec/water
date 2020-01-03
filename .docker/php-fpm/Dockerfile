@@ -1,6 +1,6 @@
-FROM alpine:3.8
-
+FROM alpine:3.9
 LABEL maintainer="Vincent Composieux <vincent.composieux@gmail.com>"
+### install unpatched wkhtmltopdf
 
 RUN apk add --update --no-cache \
     coreutils \
@@ -33,11 +33,31 @@ RUN apk add --update --no-cache \
     php7-xmlwriter \
     make \
     curl
+RUN apk add --no-cache \
+    xvfb \
+    # Additionnal dependencies for better rendering
+    ttf-freefont \
+    fontconfig \
+    dbus \
 
-RUN echo "$(curl -sS https://composer.github.io/installer.sig) -" > composer-setup.php.sig \
-        && curl -sS https://getcomposer.org/installer | tee composer-setup.php | sha384sum -c composer-setup.php.sig \
-        && php composer-setup.php && rm composer-setup.php* \
-        && chmod +x composer.phar && mv composer.phar /usr/bin/composer
+    && \
+
+    # Install wkhtmltopdf from `testing` repository
+    apk add qt5-qtbase-dev \
+            wkhtmltopdf \
+            --no-cache \
+            --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+            --allow-untrusted \
+    && \
+
+    # Wrapper for xvfb
+    mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin && \
+    echo $'#!/usr/bin/env sh\n\
+    Xvfb :0 -screen 0 1024x768x24 -ac +extension GLX +render -noreset & \n\
+    DISPLAY=:0.0 wkhtmltopdf-origin $@ \n\
+    killall Xvfb\
+    ' > /usr/bin/wkhtmltopdf && \
+    chmod +x /usr/bin/wkhtmltopdf
 
 COPY symfony.ini /etc/php7/conf.d/
 COPY symfony.ini /etc/php7/cli/conf.d/
@@ -45,7 +65,12 @@ COPY xdebug.ini  /etc/php7/conf.d/
 
 COPY symfony.pool.conf /etc/php7/php-fpm.d/
 
+
+
+
+
 CMD ["php-fpm7", "-F"]
+
 
 WORKDIR /var/www/symfony
 EXPOSE 9001

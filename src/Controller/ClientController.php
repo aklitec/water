@@ -4,8 +4,10 @@ namespace App\Controller;
 
 
 use App\Entity\Client;
+use App\Entity\WaterMeter;
 use App\Form\Client\ClientFinderType;
 use App\Form\Client\ClientType;
+use App\Form\WaterMeter\WaterMeterType;
 use App\Repository\ClientRepository;
 use App\Repository\WaterMeterRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -72,6 +74,43 @@ class ClientController extends AbstractController
     }
 
 
+    /**
+     * @Route("/{id}/water_meter/new", name="new_water_meter_to_current_client", methods={"GET","POST"})
+     * @param Client $client
+     * @param Request $request
+     * @return Response
+     */
+    public function newWMeter(Client $client ,Request $request): Response
+    {
+
+        $waterMeter = new WaterMeter();
+        $form = $this->createForm(WaterMeterType::class, $waterMeter);
+
+        $form->remove("active");
+        $form->remove("client");
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $waterMeter->setAddress($waterMeter->getAddress());
+            $waterMeter->setClient($client);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($waterMeter);
+
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('client_show',['id'=>$client->getId()]);
+        }
+
+        return $this->render('water_meter/new.html.twig', [
+            'water_meter' => $waterMeter,
+            'form' => $form->createView(),
+            'client'=> $client
+        ]);
+    }
+
+
 
     /**
      * @Route("/{id}", name="client_show", methods={"GET"})
@@ -85,12 +124,12 @@ class ClientController extends AbstractController
 
         $args = $client->getId();
         $waterMeters = $waterMeterRepository->findAllWaterMetersByClient($args);
-
         return $this->render('client/show.html.twig', [
             'waterMeters'=>$waterMeters,
             'client' => $client,
         ]);
     }
+
 
     /**
      * @Route("/{id}/edit", name="client_edit", methods={"GET","POST"})
@@ -120,14 +159,22 @@ class ClientController extends AbstractController
      * @Route("/{id}", name="client_delete", methods={"DELETE"})
      * @param Request $request
      * @param Client $client
+     * @param WaterMeterRepository $waterMeterRepository
      * @return Response
      */
-    public function delete(Request $request, Client $client): Response
+    public function delete(Request $request, Client $client, WaterMeterRepository $waterMeterRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
-
+            $wm= $waterMeterRepository->findWmByClient($client->getId());
             $entityManager = $this->getDoctrine()->getManager();
             $client->setDeleted(true);
+            if(!empty($wm)){
+                foreach ($wm as $waterMeter){
+                    $waterMeter->setDeleted(true);
+                }
+            }
+
+
             $entityManager->flush();
         }
 

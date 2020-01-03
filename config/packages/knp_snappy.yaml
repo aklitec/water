@@ -1,0 +1,18 @@
+knp_snappy:
+    process_timeout:    30
+    pdf:
+        enabled:    true
+        binary:     '%env(WKHTMLTOPDF_PATH)%'
+        options:
+            page-size:  A4
+            dpi:    300
+            image-quality:  80
+            margin-left:    5mm
+            margin-right:   5mm
+            margin-top: 10mm
+            margin-bottom: 10mm
+
+    image:
+        enabled:    true
+        binary:     '%env(WKHTMLTOIMAGE_PATH)%'
+        options:    []

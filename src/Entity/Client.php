@@ -92,14 +92,22 @@ class Client
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WaterMeter", mappedBy="client", orphanRemoval=true, cascade={"persist", "remove"})
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\WaterMeter", mappedBy="client")
      */
-    private $waterMeters;
+    private $waterMeter;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Bill", mappedBy="client")
+     */
+    private $bill;
+
+
 
     public function __construct()
     {
         $this->waterMeters = new ArrayCollection();
+        $this->waterMeter = new ArrayCollection();
+        $this->bill = new ArrayCollection();
     }
 
 
@@ -281,27 +289,34 @@ class Client
         return $this;
     }
 
+
+    public function __toString()
+    {
+        return !empty($this->fullName) ? $this->fullName : $this->firstName.' '.$this->lastName;
+    }
+
     /**
      * @return Collection|WaterMeter[]
      */
-    public function getWaterMeters(): Collection
+    public function getWaterMeter(): Collection
     {
-        return $this->waterMeters;
+        return $this->waterMeter;
     }
 
     public function addWaterMeter(WaterMeter $waterMeter): self
     {
-        if (!$this->waterMeters->contains($waterMeter)) {
-            $this->waterMeters[]=$waterMeter;
+        if (!$this->waterMeter->contains($waterMeter)) {
+            $this->waterMeter[] = $waterMeter;
             $waterMeter->setClient($this);
         }
+
         return $this;
     }
 
     public function removeWaterMeter(WaterMeter $waterMeter): self
     {
-        if ($this->waterMeters->contains($waterMeter)) {
-            $this->waterMeters->removeElement($waterMeter);
+        if ($this->waterMeter->contains($waterMeter)) {
+            $this->waterMeter->removeElement($waterMeter);
             // set the owning side to null (unless already changed)
             if ($waterMeter->getClient() === $this) {
                 $waterMeter->setClient(null);
@@ -310,6 +325,38 @@ class Client
 
         return $this;
     }
+
+    /**
+     * @return Collection|Bill[]
+     */
+    public function getBill(): Collection
+    {
+        return $this->bill;
+    }
+
+    public function addBill(Bill $bill): self
+    {
+        if (!$this->bill->contains($bill)) {
+            $this->bill[] = $bill;
+            $bill->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBill(Bill $bill): self
+    {
+        if ($this->bill->contains($bill)) {
+            $this->bill->removeElement($bill);
+            // set the owning side to null (unless already changed)
+            if ($bill->getClient() === $this) {
+                $bill->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
 

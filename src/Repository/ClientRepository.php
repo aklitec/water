@@ -50,6 +50,14 @@ class ClientRepository extends ServiceEntityRepository
         return  $qb->getQuery();
     }
 
+    public function select(Client $client= null) {
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->andWhere('c.deleted= :false')
+            ->setParameter('false', false);
+        return $query;
+    }
+
 
     public function  searchByQuery($query,$max){
         $qb = $this
@@ -57,13 +65,16 @@ class ClientRepository extends ServiceEntityRepository
 
                 $qb->select('s')
                     ->andwhere('s.fullName LIKE :query')
-                    ->andWhere('e.deleted= :false')
+                    ->andWhere('s.deleted= :false')
                     ->setParameter('query', '%'.$query.'%')
                     ->setParameter('false', false)
                     ->setMaxResults($max);
 
             return $qb->getQuery();
     }
+
+
+
 
     public function  findMatchedClients($query , int $page=1){
         $qb = $this

@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "client_id": 1,
+    "code": "575681c4-d57c-41e3-a34b-e88d3bf3b7d6",
+    "setup_date": "2018-12-23 00:12:00",
+    "created_at": "2019-11-23 01:57:47",
+    "updated_at": "2019-11-23 01:59:46",
+    "active": 1,
+    "wm_number": "1234",
+    "deleted": 1
+  },
+  {
+    "id": 2,
+    "client_id": 1,
+    "code": "b61044c5-69c2-48b4-b126-fe69837112f2",
+    "setup_date": "2018-12-23 00:12:00",
+    "created_at": "2019-11-23 01:59:11",
+    "updated_at": "2019-11-23 02:16:23",
+    "active": 1,
+    "wm_number": "1234",
+    "deleted": 1
+  },
+  {
+    "id": 3,
+    "client_id": 1,
+    "code": "a4fddef3-ba73-4501-8d2b-3864f792022a",
+    "setup_date": "2018-12-23 00:11:00",
+    "created_at": "2019-11-23 02:18:47",
+    "updated_at": "2019-11-23 02:18:47",
+    "active": 1,
+    "wm_number": "55555",
+    "deleted": 0
+  },
+  {
+    "id": 4,
+    "client_id": 1,
+    "code": "088962a6-072a-473c-b032-ab4c5f2c6572",
+    "setup_date": "2019-12-22 00:02:00",
+    "created_at": "2019-12-25 09:23:23",
+    "updated_at": "2019-12-25 09:23:23",
+    "active": 1,
+    "wm_number": "12341",
+    "deleted": 0
+  },
+  {
+    "id": 5,
+    "client_id": 1,
+    "code": "d4a39a42-9080-40c5-a575-654d79427e1e",
+    "setup_date": "2019-12-30 00:00:00",
+    "created_at": "2019-12-25 14:40:24",
+    "updated_at": "2019-12-25 14:40:24",
+    "active": 1,
+    "wm_number": "1111",
+    "deleted": 0
+  }
+]

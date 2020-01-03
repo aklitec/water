@@ -13,7 +13,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
-                <li><a href="{{ path('water_meter_index') }}"> {{ 'Consumptions.iedex' | trans }} </a></li>
+                <li><a href="{{ path('water_meter_index') }}"> {{ 'Consumptions.index' | trans }} </a></li>
                 <li class="active">{{ 'Consumptions.show.title' | trans }}</li>
             </ol>
         </div>
@@ -47,9 +47,14 @@
                 </div>
             </div>
             <!-- Content -->
-            <div class="card" style="background-color: #7dc4f6">
-                <div class="card-header  isolated">
-                    <h3 class="card-title col-centered font-weight-bold "> {{ 'Consumptions.form.year.title' | trans }} : {{ year.date is defined ?year.date: date('now') |date('Y') }}  </h3>
+            <div class="card paginate">
+                <div class="card-header isolated">
+                    {% set currentYear = date('now')|date('Y') %}
+                    {% set prevYear = currentYear-1 %}
+                    {% set nextYear = currentYear+1 %}
+                    <button type="button" class="btn btn-dark fa fa-angle-double-left-perso" id="prevYear">{{prevYear}}</button>
+                    <h3 class="card-title col-centered font-weight-bold" > {{ 'Consumptions.form.year.title' | trans }} : <span id="currentYear" value="{{ currentYear }}">{{currentYear}}</span>  </h3>
+                    <button type="button" class="btn btn-dark fa fa-angle-double-right-perso" id="nextYear">{{nextYear}}</i></button>
                 </div>
             </div>
             <div class="card">
@@ -58,12 +63,12 @@
                         <a href="{{ path('consumption_new',{'id':waterMeter.id})}}"  class="btn btn-pill btn-outline-primary">
                             <i class="fe fe-plus"></i> {{'Consumptions.actions.add'|trans}}
                         </a>
-                        <a href="#"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
-                            <i class="fe fe-file"></i> {{'Consumptions.actions.export.pdf'|trans}}
-                        </a>
-                        <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
-                            <i class="fe fe-file-text"></i> {{'Consumptions.actions.export.excel'|trans}}
-                        </a>
+                            {#<a href="#"  class="btn btn-pill btn-outline-success d-none d-md-inline-block">
+                                <i class="fe fe-file"></i> {{'Consumptions.actions.export.pdf'|trans}}
+                            </a>
+                            <a href="#"  class="btn btn-pill btn-outline-danger d-none d-sm-inline-block">
+                                <i class="fe fe-file-text"></i> {{'Consumptions.actions.export.excel'|trans}}
+                            </a>#}
                     </h3>
                     <div class="card-options">
                         <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
@@ -76,7 +81,6 @@
 
                         <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
                             <thead>
-
                             <tr>
                                 <th>Months</th>
                                 <th >{{ 'Consumptions.form.code' | trans }}</th>
@@ -85,56 +89,45 @@
                                 <th>{{ 'Consumptions.form.currentRecord'| trans  }}</th>
                                 <th>{{ 'Consumptions.form.consumption'| trans  }}</th>
                                 <th class="col-2">{{ 'Consumptions.form.status'| trans  }}</th>
-                                <th class="text-right"> {{ 'Consumptions.form.actions'| trans  }}</th>
+                               {# <th class="text-right"> {{ 'Consumptions.form.actions'| trans  }}</th>#}
                             </tr>
                             </thead>
-                            <tbody>
-
-                            {%  if consumptions is defined %}
-                                {%  for consumption in consumptions %}
-                                    {# {% if consumption.month == i %}#}
-                                    <tr><td> {{consumption.month}} </td>
-                                        <td> <span class="tag"> {{consumption.code}}</span></td>
-                                        <td>{{ consumption.date | date('Y-m-d') }}</td>
-                                        <td class="text-center">{{ consumption.previousRecord }}</td>
-                                        <td class="text-center">{{ consumption.currentRecord }}</td>
-                                        <td class="text-center">{{ consumption.consumption }}</td>
-                                        {% if  consumption.status == 0 %}
-                                            {%  set status = 'not paid' %}
-                                        {% elseif consumption.status == 1 %}
-                                            {%  set status = 'paid' %}
-                                        {% else %}
-                                            {%  set status = 'alert' %}
-                                        {% endif %}
-                                        <td>{{status}}</td>
-                                        <td class="text-right">
-                                            <a href="{{ path('water_meter_show', {'id': waterMeter.id}) }}" class="btn btn-sm btn-outline-warning" title="{{'show'|trans({},'actions')}}"><i class="fe fe-printer"></i></a>
-                                            {# {%   include('water_meter/_delete_form.html.twig') %}#}
-                                        </td>
-                                    </tr>
-                                    {# {% endif %}#}
-                                {% endfor %}
-                            {% endif %}
-
+                            <tbody id="Table">
+                                <tr class="spinner" id="spinner">
+                                    <td>
+                                        <div class="sk-circle">
+                                            <div class="sk-circle1 sk-child"></div>
+                                            <div class="sk-circle2 sk-child"></div>
+                                            <div class="sk-circle3 sk-child"></div>
+                                            <div class="sk-circle4 sk-child"></div>
+                                            <div class="sk-circle5 sk-child"></div>
+                                            <div class="sk-circle6 sk-child"></div>
+                                            <div class="sk-circle7 sk-child"></div>
+                                            <div class="sk-circle8 sk-child"></div>
+                                            <div class="sk-circle9 sk-child"></div>
+                                            <div class="sk-circle10 sk-child"></div>
+                                            <div class="sk-circle11 sk-child"></div>
+                                            <div class="sk-circle12 sk-child"></div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
+
                         </table>
+
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <div class="card-footer pagination">
-            {% if consumptions.haveToPaginate %}
-                <div class="card-footer pagination">
-                    {{
-                    pagerfanta(consumptions, 'twitter_bootstrap4_translated', {
-                        routeName: 'consumption_show_paginated',
-                        routeParams: {'id':waterMeter.id}
-                    })
-                    }}
-                </div>
-            {% endif %}
-        </div>
-
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/babel" src="{{ asset('app/js/reactConsumptionTable.js') }}"></script>
+    <script type="text/babel">
+        var wmId= {{ waterMeter.id }}
+        ReactDOM.render(<ConsumptionTable id={wmId}/>, document.getElementById('Table'))
+    </script>
 {% endblock %}

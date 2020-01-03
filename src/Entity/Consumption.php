@@ -86,6 +86,8 @@ class Consumption
      */
     private $deleted = 0;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -264,6 +266,14 @@ class Consumption
         $this->deleted = $deleted;
         return $this;
     }
+
+    public function __toString()
+        {
+        return !empty($this->id) ? $this->getDate()->format('Y') : $this->getDate()->format('Y' ) ;
+    }
+
+
+
 
 
 }
