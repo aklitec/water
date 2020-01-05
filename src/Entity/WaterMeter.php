@@ -54,11 +54,6 @@ class WaterMeter
      */
     private $wmNumber;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="waterMeters",cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $client;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="waterMeter", cascade={"persist", "remove"})
@@ -75,6 +70,16 @@ class WaterMeter
      * @var boolean
      */
     private $deleted = 0;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Bill", mappedBy="waterMeter", cascade={"persist", "remove"})
+     */
+    private $bill;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="waterMeter")
+     */
+    private $client;
 
 
 
@@ -144,17 +149,6 @@ class WaterMeter
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
 
     public function __construct()
     {
@@ -245,5 +239,42 @@ class WaterMeter
         $this->deleted = $deleted;
         return $this;
     }
+
+
+    public function __toString()
+    {
+        return !empty($this->wmNumber) ? $this->getAddress()->getCity() : $this->getAddress()->getCity();
+    }
+
+    public function getBill(): ?Bill
+    {
+        return $this->bill;
+    }
+
+    public function setBill(Bill $bill): self
+    {
+        $this->bill = $bill;
+
+        // set the owning side of the relation if necessary
+        if ($bill->getWaterMeter() !== $this) {
+            $bill->setWaterMeter($this);
+        }
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+
 
 }

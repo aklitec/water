@@ -1,0 +1,257 @@
+<!DOCTYPE>
+<html lang="ar" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style-type:none;
+        }
+        body {
+            font-family:Qelew, DejaVu Sans, sans-serif;
+        }
+
+        .mainPage>div{
+            display: flex;
+            flex-wrap: wrap;
+            clear: both;
+            margin-bottom: 50px;
+        }
+        .page1{
+            margin-top: 5px;
+            page-break-after: always;
+        }
+
+        .mainPage {
+            width: 23cm;
+            height: 33cm;
+            margin: 0 auto auto;
+        }
+
+
+        .normal {
+            background: #79F27D;
+        }
+
+        .facture{
+            width: 12.8cm;
+            position: relative;
+            height: 11.32cm;
+            margin: 3px 3px 15px;
+            border-bottom: 1px dashed black;
+        }
+        .facture>div>h3,h6{
+            width: fit-content;
+            margin: auto;
+            text-align: center;
+        }
+        .header{
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            line-height: 25px;
+        }
+        .body{
+            direction: rtl;
+            font-size: 10px;
+            margin-top: 10px;
+        }
+
+        .part2{
+            margin-top: 15px;
+            margin-bottom: 11px;
+        }
+        .subBodyPart1{
+            margin-bottom: 21px;
+            margin-right: 20px;
+        }
+        .subBodyPart1>ul>li{
+            line-height: 20px;
+        }
+        .subBodyPart2{
+            margin-right: 20px;
+            width: 94%;
+            border: 1px solid;
+            background-color: #C4C4C4;
+        }
+
+        .subBodyPart2>ul>li{
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+            margin-left: 10px;
+        }
+        .subBodyPart2>ul{
+
+            display: flex;
+            direction: ltr;
+            width: 440px;
+            flex-direction: row-reverse;
+            margin-bottom: 0px !important;
+            padding: 2px;
+        }
+        .subBodyPart2>ul>li>span{
+            text-align: center;
+            border-top: .7px dashed;
+        }
+
+        .subBodyPart3{
+            margin-right: 20px;
+            width: 94%;
+            border: 1px solid;
+            background-color: #C4C4C4;
+        }
+        .subBodyPart3>ul{
+            display: flex;
+            direction: ltr;
+            width: 440px;
+            flex-direction: row-reverse;
+            margin-bottom: 0px !important;
+            padding: 2px;
+        }
+        .subBodyPart3>ul>li{
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+            margin-left: 15px;
+            width:80px;
+        }
+
+        .subBodyPart3>ul>li>span{
+            text-align: center;
+            border-top: .7px dashed;
+        }
+
+        .subBodyPart4{
+            display: flex;
+            margin-right: 20px;
+            width: 70%;
+        }
+        .subBodyPart4>ul{
+            display: flex;
+        }
+
+        .subBodyPart4>ul>li:first-child{
+            width:125px
+        }
+        .subBodyPart4>ul>li{
+            direction: ltr;
+            width: 160px;
+            border: 1px black solid;
+            padding: 5px;
+        }
+
+        .warning {
+            width: 60%;
+        }
+        .warning>p{
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 0px !important;
+            color: red;
+        }
+        .dateImpression{
+            width: 35%;
+            display: flex;
+            margin-right: 10px;
+        }
+        .dateImpression>p{
+            font-size: 6px;
+            margin: 2px 2px 0px 0px;
+        }
+
+
+        .footer{
+            position: relative;
+            top: 20px;
+        }
+
+        .footerBody{
+            display: flex;
+            flex-direction: row-reverse;
+            margin-top: 40px;
+        }
+
+        @font-face {
+            font-family: Qelew;
+            /*   src:url({{absolute_url('/app/fonts/Qelew.ttf') }});*/
+            src:url({{asset('/home/mistermed90/Desktop/certApp/cert/public/app/fonts/Qelew.ttf') }});
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div>
+    <div class="mainPage" style=" width: 26cm">
+        {% for bills in arrayBills %}
+            <div class="page1">
+                {% for bill in bills %}
+                <div class="facture">
+                    <div class="header">
+                        <h3>فاتورة الماء الصالح للشرب</h3>
+                        <h6>جمعية الفتح جماعة اكليم</h6>
+                        <span style="font-size:8px; padding:2px;border: grey 1px solid; transform: scale(0.6)"> فاتورة رقم : <span>{{bill.billCode}}</span></span>
+                    </div>
+                    <div class="body">
+                        <div class="subBodyPart1">
+                            <ul style="direction: rtl">
+                                <li>الاسم الكامل للزبون : <span>{{ bill.fullName }} </span></li>
+                                <li> بطاقة التعريف الوطنية : <span>{{ bill.cin }} </span></li>
+                                <li>رقم العداد : <span> {{ bill.wmNumber }} </span></li>
+                                <li>العنوان : <span>{{ bill.address }} </span></li>
+                            </ul>
+                        </div>
+                        <div class="subBodyPart2">
+                            <ul>
+                                <li style="width: 60px;"><span>{{bill.wmNumber}}</span>رقم العداد</li>
+                                <li style="width: 80px;"><span>{{ bill.consumptionDate|date('Y-m-d') }} </span>تاريخ الإستهلاك</li>
+                                <li style="width: 100px; direction: rtl"><span>{{bill.oldConsumption}} </span>الإستهلاك القديم (م³)</li>
+                                <li style="width: 100px; direction: rtl"><span>{{bill.newConsumption}} </span>الإستهلاك الجديد (م³)</li>
+                                <li style="width: 50px; direction: rtl"><span>{{bill.consumption}} </span>الفرق (م³)</li>
+                            </ul>
+                        </div>
+                        <div class="part2">
+                            <h3 style="margin-right: 20px ">مستحقات الإستهلاك</h3>
+                            <div class="subBodyPart3">
+                                <ul>
+                                    <li style="margin-right: 20px"><span>{{bill.consumption }} </span> الشطر الأول</li>
+                                    <li><span>0 </span>الشطر الثاني</li>
+                                    <li><span>0 </span>الشطر الثالث</li>
+                                    <li><span>10 dh </span> مبلغ إضافي</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="subBodyPart4">
+                            <ul>
+                                <li><span>{{bill.cost+10}} dh :</span> الواجب أداءه</li>
+                                <li><span>{{ bill.printDate|date_modify("+20 day")|date("Y-m-d") }} :</span> آخر اجل للأداء</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="footerHeader">
+                            <h6>إمضاء رئيس الجمعية</h6>
+                        </div>
+                        <div class="footerBody">
+                            <div class="warning">
+                                <p>إن عدم أداء فاتورتكم قبل الموعد المحدد سيعرضكم لأداء غرامة </p>
+                            </div>
+                            <div class="dateImpression">
+                                <p> تاريخ الطبع : </p><p>{{ bill.printDate|date('Y-m-d') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

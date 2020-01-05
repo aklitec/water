@@ -25,7 +25,6 @@ class ClientType extends AbstractType
                 'download_uri' => false,
                 'translation_domain' =>'clients'
 
-
             ))
             ->add('cin', TextType::Class, ['label'=>'clients.form.cin'])
             ->add('firstName', TextType::Class, ['label'=>'clients.form.firstName'])

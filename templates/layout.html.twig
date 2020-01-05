@@ -37,73 +37,27 @@
 {% endblock %}
 
 {% block javascripts %}
-    <!-- Require JS -->
+    {#
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <script src="{{ asset('tabler/js/require.min.js') }}"></script>
     <script> requirejs.config({baseUrl: '.'}); </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    {#<script src="{{ asset('tabler/js/require.min.js') }}"></script>#}
-   {# <script> requirejs.config({baseUrl: '.'}); </script>#}
     <!-- Dashboard Core -->
     <script src="{{ asset('tabler/js/dashboard.js') }}"></script>
     <!-- Input Mask Plugin -->
     <script src="{{ asset('tabler/plugins/input-mask/plugin.js') }}"></script>
     <!-- Datepicker Plugin -->
-  {#  <script src="{{ asset('tabler/plugins/datetimepicker/plugin.js') }}"></script>#}
+    <script src="{{ asset('tabler/plugins/datetimepicker/plugin.js') }}"></script>
     <!-- Toastify Plugin -->
     <script src="{{ asset('tabler/plugins/toastify/toastify.js') }}"></script>
+
     <!-- App main.js -->
 
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-    <script src="{{ asset('tabler/js/vendors/jquery.datetimepicker.full.min.js') }}"></script>
     <script src="{{ asset('app/js/main.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.datetimepicker').datetimepicker({
-                timepicker:false,
-                format : 'd-m-Y'
-            });
-
-            $('.custom-file-input').on('change', function(event) {
-                var inputFile = event.currentTarget;
-                $(inputFile).parent()
-                    .find('.custom-file-label')
-                    .html(inputFile.files[0].name);
-            });
-
-
-                console.log('Hi')
-             //   $("#consumption_currentRecord").prop('readonly', true);
-
-
-
-                $("#consumption_currentRecord").change(function(e){
-                    $("#consumption_consumption").val($("#consumption_currentRecord").val()-$("#consumption_previousRecord").val());
-                    let cc = $("#consumption_consumption").val();
-                    let cpm = 5;
-                    if (cc <= 5){
-                        cpm=5
-                    }else{
-                        cpm=7
-                    }
-                    $("#consumption_costPerMeterCube").val(cpm)
-                });
-
-
-                $('.custom-file-input').on('change', function(event) {
-                    const inputFile = event.currentTarget;
-                    console.log('hello');
-                    $(inputFile).parent()
-                        .find('.custom-file-label')
-                        .html(inputFile.files[0].name);
-                });
-
-
-        })
-    </script>
-
 {% endblock %}
 
 {% block bodyClass %}
@@ -116,6 +70,22 @@
             {% include 'elements/header.html.twig' %}
 
             {% include 'elements/navbar.html.twig' %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger" role="alert" style="text-align: center">
+                    {{message}}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning" role="alert" style="text-align: center">
+                    {{message}}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert" style="text-align: center">
+                    {{ message }}
+                </div>
+            {% endfor %}
 
             <div class="my-3 my-md-5">
                 <div class="container">
@@ -136,5 +106,7 @@
             {% include 'elements/footer.html.twig' %}
 
         </div>
+
     </div>
+
 {% endblock %}

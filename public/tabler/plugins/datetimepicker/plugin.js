@@ -3,6 +3,6 @@ require.config({
         'datetimepicker': ['jquery', 'moment']
     },
     paths: {
-        'datetimepicker': './js/bootstrap-datetimepicker.min.js'
+        'datetimepicker': '/tabler/plugins/datetimepicker/js/bootstrap-datetimepicker.min'
     }
 });

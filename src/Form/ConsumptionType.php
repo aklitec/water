@@ -20,7 +20,7 @@ class ConsumptionType extends AbstractType
                 'html5' => false,
                 'attr' => [
                     'class' => 'datetimepicker',
-                    'placeholder' => 'dd/mm/yyyy',
+                    'placeholder' => 'dd-mm-yyyy',
                 ]
             ])
             ->add('previousRecord', NumberType::class,['disabled'=>true])

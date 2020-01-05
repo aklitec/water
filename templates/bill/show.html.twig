@@ -1,0 +1,138 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'bill' %}
+
+
+{% block title %}{{'bill'|trans }} | {{ parent() }}{% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'bill.show.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('bill_index') }}"> {{ 'bill.index' | trans }} </a></li>
+                <li class="active">{{ 'bill.show.title' | trans }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="my-3 my-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6> Copy of the bill released for the water meter  N: {{ waterMeter.wmNumber }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="facture">
+                                <div class="billHeader">
+                                    <h3>فاتورة الماء الصالح للشرب</h3>
+                                    <h6>جمعية الفتح جماعة اكليم</h6>
+                                    <span style="font-size:8px; padding:2px;border: grey 1px solid; transform: scale(0.6)"> فاتورة رقم : <span>{{bill.code}}</span></span>
+                                </div>
+                                <div class="body">
+                                    <div class="subBodyPart1">
+                                        <ul>
+                                            <li>الاسم الكامل للزبون : <span>{{ billOwner.fullName }} </span></li>
+                                            <li> بطاقة التعريف الوطنية : <span>{{ billOwner.cin }} </span></li>
+                                            <li>رقم العداد : <span> {{ waterMeter.wmNumber }} </span></li>
+                                            <li>العنوان : <span>{{ waterMeter.address }} </span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="subBodyPart2">
+                                        <ul>
+                                            <li><span>{{waterMeter.wmNumber}}</span>رقم العداد</li>
+                                            <li><span>{{bill.consumptionDate|date('Y-m-d') }} </span>تاريخ الإستهلاك</li>
+                                            <li><span>{{bill.previousRecord}} </span>الإستهلاك القديم (م³)</li>
+                                            <li><span>{{bill.newRecord}} </span>الإستهلاك الجديد (م³)</li>
+                                            <li><span>{{bill.consumption}} </span>الفرق (م³)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="part2">
+                                        <h3 class="titlePart2">مستحقات الإستهلاك</h3>
+                                        <div class="subBodyPart3">
+                                            <ul>
+                                                <li style="margin-right: 20px"><span>30 </span> الشطر الأول</li>
+                                                <li><span>{{bill.consumption }} </span>الشطر الثاني</li>
+                                                <li><span>0 </span>الشطر الثالث</li>
+                                                <li><span>0 </span> مبلغ إضافي</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="subBodyPart4">
+                                        <ul>
+                                            <li><span>{{bill.cost}} dh :</span> الواجب أداءه</li>
+                                            <li><span>{{ bill.printDate|date_modify("+20 day")|date("Y-m-d") }} :</span> آخر اجل للأداء</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="billFooter">
+                                    <div class="footerHeader">
+                                        <h6>إمضاء رئيس الجمعية</h6>
+                                    </div>
+                                    <div class="footerBody">
+                                        <div class="warning">
+                                            <p>إن عدم أداء فاتورتكم قبل الموعد المحدد سيعرضكم لأداء غرامة </p>
+                                        </div>
+                                        <div class="dateImpression">
+                                            <p> تاريخ الطبع : {{ bill.printDate|date('Y-m-d') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center receipt-not-paid">
+                            <p class="mb-4">
+                                This bill has no receipt yet
+                            </p>
+                            <p class="mb-4">
+                                click confirm button to confirm payment and print a receipt
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <span class="fa fa-printer"></span> CONFIRM
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Client INFO </h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <p><i class="fe fe-user"></i> Full Name : {{billOwner.fullName}}</p>
+                                    <p><i class="fa fa-vcard-o"></i> CIN : {{billOwner.cin}}</p>
+                                    <p><i class="fe fe-phone"></i> Phone Number : {{ billOwner.phoneNumber?billOwner.phoneNumber:'Not provided' }}</p>
+                                    <p><i class="fe fe-map-pin"></i> ADDRESS : {{ billOwner.address }}</p>
+                                </div>
+                                {% set dateNow = date('now')%}
+                                {% set durationDays = dateNow.diff(waterMeter.setupDate).format('%d') %}
+                                {% set durationMonths = dateNow.diff(waterMeter.setupDate).format('%m') %}
+                                <div style="margin-bottom: 10px; text-align: center">--------------------------------------------------</div>
+                                <div class="form-group">
+                                    <p>Date subscription : {{ waterMeter.setupDate|date('Y-m-d') }}</p>
+                                    <p>Duration of the service : {{durationMonths}} Months, {{ durationDays }} days</p>
+                                    <p>Amount consumed last month : {{bill.previousRecord}} M³</p>
+                                    <p>Total amount of water consumed : {{totalConsumption}} M³</p>
+                                    <p>Total Amount paid : {{ totalCost?totalCost:0}} DH</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -7,10 +7,12 @@ require.config({
         'vector-map-de': ['vector-map', 'jquery'],
         'vector-map-world': ['vector-map', 'jquery'],
         'core': ['bootstrap', 'jquery'],
+        'select':['jquery'],
     },
     paths: {
+        'select':'/tabler/js/vendors/select2.min',
         'core': '/tabler/js/core',
-        'jquery': '/tabler/js/vendors/jquery-3.2.1.min',
+        'jquery': '/tabler/js/vendors/jquery-3.4.1.min',
         'bootstrap': '/tabler/js/vendors/bootstrap.bundle.min',
         'sparkline': '/tabler/js/vendors/jquery.sparkline.min',
         'selectize': '/tabler/js/vendors/selectize.min',

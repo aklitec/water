@@ -1,5 +1,5 @@
 #----------index-----------------
-Consumptions.iedex: Consumptions
+Consumptions.index: Water meter list
 Consumptions.index.title : Consumption page
 Consumptions.index.header: List of consumptions
 Consumptions.index.homepage: Home
@@ -16,7 +16,7 @@ Consumptions.form.currentRecord: Curent Record
 Consumptions.form.consumption: Consumption
 Consumptions.form.status: Status
 Consumptions.form.cost: Cost
-Consumptions.form.year.title: Consumtpion list of
+Consumptions.form.year.title: Consumption list of
 Consumptions.form.infos: Informaitions
 Consumptions.isDeleted.true: Active
 Consumptions.isDeleted.false: Suspended

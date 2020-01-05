@@ -43,11 +43,7 @@
                     <div class="card-body-title">{{ 'WaterMeters.show.address'|trans }}<div class="pull-right"></div></div>
                     {% if client is not defined %}
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <label for="selectClient">Client</label><select id="selectClient" required class="js-example-basic-multiple js-states form-control select2-hidden-accessible" style="width: 50%" name="selectClient" >
-                            </select>
-                            <div class="col-md-6 col-sm-12" style="padding: 0.375rem 0.75rem;">{{ form_row(form.client,{'id':'clientId'}) }}</div>
-                        </div>
+                            <div class="col-md-6 col-sm-12" style="padding: 0.375rem 0.75rem;">{{ form_row(form.client) }}</div>
                     </div>
                     {% endif %}
                     <div class="row">
@@ -89,23 +85,30 @@
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="{{asset('tabler/css/jquery.datetimepicker.min.css')}}"/>
 {% endblock %}
+{#
 
 {% block javascripts %}
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-    <script src="{{ asset('tabler/js/vendors/jquery.datetimepicker.full.min.js') }}"></script>
-
-    <script>
+    #}
+{#<script>
         $(document).ready(function() {
-            $("#selectClient").on("select2:select", function (e) {
-                $("#clientId").val(e.params.data.id)
-            });
 
-            $("#selectClient").select2({
+            if  ($('.select2').length) {
+                    $('.select2').select2({
+                         width: '100%',
+                        // allowClear: true,
+                         placeholder: "Choisir ..."
+                    })
+            }
+
+           /* $("#selectClient").on("select2:select", function (e) {
+                $("#clientId").val(e.params.data.id)
+            });*/
+
+            $(".select2").select2({
                 ajax: {
                     dataType: 'json',
-                    url:"/water/meter/new/client",
+                    url:"/water_meter/api/client/",
                     delay: 150,
                     data: function (params) {
                         return  {
@@ -113,7 +116,6 @@
                         }
                     },
                     processResults: function(response){
-                        console.log('Res:',response)
                         return {
                             results: $.map(response, function(item) {
                                 return {
@@ -129,14 +131,16 @@
             });
 
 
-            $('.datetimepicker').datetimepicker({
+            /*$('.datetimepicker').datetimepicker({
                   timepicker:false,
                   format : 'd-m-Y'
-              });
+              });*/
          })
-    </script>
+    </script>#}{#
+
 
 {% endblock %}
+#}
 
 
 

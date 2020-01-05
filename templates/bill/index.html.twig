@@ -1,0 +1,171 @@
+{% extends 'layout.html.twig' %}
+
+{% trans_default_domain 'bill' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}{{'bill'|trans }} | {{ parent() }}{% endblock %}
+
+{% block pageHeader %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                {{ 'bill.index.title' | trans }}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="fe fe-home"></i> Home</a></li>
+                <li><a href="{{ path('bill_index') }}"> {{ 'bill.index' | trans }} </a></li>
+                <li class="active">{{ 'bill.index.title' | trans }}</li>
+            </ol>
+        </div>
+    </div>
+        {{include('bill/bill_header/bill_header.html.twig')}}
+{% endblock %}
+
+{% block content %}
+    <div class="card row-cards">
+            <div class="col-12">
+                    <form action="" class="searchBox-body">
+                        <div class="card-body" style="margin-bottom:-15px">
+                            {{ form_start(form, {'method': 'GET'}) }}
+
+                            {% set params = app.request.query.all %}
+                            <div class="row">
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-code"></i></span>
+                                            {{ form_widget(form.code, {value: params.bill_finder.code | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                            {{ form_widget(form.cin, {value: params.bill_finder.cin | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-tag"></i></span>
+                                            {{ form_widget(form.fullName, {value: params.bill_finder.fullName | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-block btn-outline-dark"><i class="fe fe-search  "></i> {{'bill.actions.get'|trans}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="width: 86%;">
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-clipboard"></i></span>
+                                            {{ form_widget(form.status, {value: params.bill_finder.status | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-calendar"></i></span>
+                                            {{ form_widget(form.month, {value: params.bill_finder.month | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-icon">
+                                            <span class="input-icon-addon"><i class="fe fe-calendar"></i></span>
+                                            {{ form_widget(form.year, {value: params.bill_finder.year | default('') }) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            {{ form_end(form) }}
+                        </div>
+                    </form>
+                {% if bills.count!=0 %}
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                                    <thead>
+                                        <tr class="headerFactureTable">
+                                            <th colspan="3">BILL INFO</th>
+                                            <th colspan="12">STATUS</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="border-left: solid 1px black">{{ 'wmId'| trans  }}</th>
+                                            <th>{{ 'Name'| trans  }}</th>
+                                            <th class="thBorder">{{ 'C.I.N'| trans  }}</th>
+                                            <td>Jan</td>
+                                            <td>fév</td>
+                                            <td>Mar</td>
+                                            <td>Avr</td>
+                                            <td>Mai</td>
+                                            <td>Juin</td>
+                                            <td>Juil</td>
+                                            <td>Out</td>
+                                            <td>Sep</td>
+                                            <td>Oct</td>
+                                            <td>Nov</td>
+                                            <td class="thBorder">Dec</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="footerFactureTable">
+                                        {% for bill in bills %}
+                                            {% set consumptionDate = bill.consumptionDate|date('m') %}
+                                        <tr>
+                                            <td style="border-left: solid 1px black">
+                                                {{ bill.code }}
+                                            </td>
+                                            <td>
+                                                {{ bill.fullName }}
+                                            </td>
+                                            <td class="thBorder">{{ bill.cin }}</td>
+                                            <td>{% if consumptionDate == '01' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '02' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '03' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '04' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '05' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '06' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '07' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '08' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '09' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '10' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td>{% if consumptionDate == '11' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                            <td class="thBorder">{% if consumptionDate == '12' %} <a href="{{ path('bill_show',{'id': bill.id}) }}" >{% if bill.status == true %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</a> {% else %} ---- {% endif %}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                {% endif %}
+                {% if bills.haveToPaginate %}
+                    <div class="card-footer pagination">
+
+                        {{
+                        pagerfanta(bills, 'twitter_bootstrap4_translated', {
+                            routeName: '/bill_index_paginated',
+                            routeParams:{}
+                        })
+                        }}
+                    </div>
+                {% endif %}
+             </div>
+    </div>
+
+{% endblock %}

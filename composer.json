@@ -5,9 +5,13 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "beberlei/doctrineextensions": "^1.2",
         "eternicode/bootstrap-datepicker": "^1.9",
         "friendsofsymfony/user-bundle": "^2.1",
+        "h4cc/wkhtmltopdf-amd64": "0.12.4",
+        "h4cc/wkhtmltopdf-i386": "0.12.4",
+        "knplabs/knp-snappy-bundle": "^1.7",
         "knplabs/knp-time-bundle": "^1.9",
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
@@ -25,10 +29,9 @@
         "symfony/templating": "4.3.*",
         "symfony/translation": "4.3.*",
         "symfony/yaml": "4.3.*",
+        "tetranz/select2entity-bundle": "2.*",
         "vich/uploader-bundle": "^1.10",
-        "white-october/pagerfanta-bundle": "^1.2",
-        "ext-json": "*",
-        "tetranz/select2entity-bundle": "2.*"
+        "white-october/pagerfanta-bundle": "^1.2"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.13",
