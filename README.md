@@ -1,5 +1,5 @@
 # WaterBills system preview
-Water consumption management system, ist intelligent way to create and pay bills, send invoices, and get paid.
+Water consumption management system written with Php symfony and js, is an intelligent way to create and pay bills, send invoices, and get paid.
 
 
 <br/>
